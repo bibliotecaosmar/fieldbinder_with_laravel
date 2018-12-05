@@ -13,32 +13,15 @@ use App\Repositories\UserRepository;
 use App\Validators\UserValidator;
 use App\Services\UserService;
 
-/**
- * Class UsersController.
- *
- * @package namespace App\Http\Controllers;
- */
 class UsersController extends Controller
 {
-    /**
-     * @var UserValidator
-     */
     protected $service;
 
-    /**
-     * @var UserRepository
-     */
     protected $repository;
 
-    /**
-     * UsersController constructor.
-     *
-     * @param UserRepository $repository
-     * @param UserValidator $validator
-     */
     public function __construct(UserRepository $repository, UserService $service)
     {
-        $this->service = $service;
+        $this->service    = $service;
         $this->repository = $repository;
     }
 
@@ -53,7 +36,6 @@ class UsersController extends Controller
         $users = $this->repository->all();
 
         if (request()->wantsJson()) {
-
             return response()->json([
                 'data' => $users,
             ]);
@@ -76,14 +58,12 @@ class UsersController extends Controller
         $request = $this->service->store($request->all());
         $user = $request['success'] ? $request['data'] : null;
 
-        session()->flush('success', [
+        session()->flash('success', [
                             'success' => $request['success'],
                             'message' => $request['message'],
                             ]);
 
-        return view('home',[
-            'user' => $user
-        ]);
+        return redirect()->route('user.account');
     }
 
     /**

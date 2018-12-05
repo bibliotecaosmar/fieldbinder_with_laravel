@@ -1,12 +1,6 @@
 <li>
-    <a href="{{ route('documentation.guide') }}">
-        <i class="sidebar-menu"></i>
-        <h3>guide</h3>
-    </a>
+    <a href="{{ route('documentation.guide') }}">guide</a>
 </li>
 <li>
-    <a href="{{ route('documentation.ourproposal') }}">
-        <i class="sidebar-menu"></i>
-        <h3>ourproposal</h3>
-    </a>
+    <a href="{{ route('documentation.ourproposal') }}">ourproposal</a>
 </li>

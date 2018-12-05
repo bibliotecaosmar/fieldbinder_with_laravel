@@ -12,40 +12,17 @@ use App\Http\Requests\SpiecieUpdateRequest;
 use App\Repositories\SpiecieRepository;
 use App\Validators\SpiecieValidator;
 
-/**
- * Class SpieciesController.
- *
- * @package namespace App\Http\Controllers;
- */
 class SpieciesController extends Controller
 {
-    /**
-     * @var SpiecieRepository
-     */
     protected $repository;
-
-    /**
-     * @var SpiecieValidator
-     */
     protected $validator;
 
-    /**
-     * SpieciesController constructor.
-     *
-     * @param SpiecieRepository $repository
-     * @param SpiecieValidator $validator
-     */
     public function __construct(SpiecieRepository $repository, SpiecieValidator $validator)
     {
-        $this->repository = $repository;
-        $this->validator  = $validator;
+        $this->repository   = $repository;
+        $this->validator    = $validator;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));

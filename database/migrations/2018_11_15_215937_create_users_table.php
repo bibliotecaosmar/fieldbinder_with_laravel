@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
 			$table->string('nickname', 22)->unique()->nullable();
 			$table->date('birth');
 			$table->string('pic')->nullable();
-			$table->string('name', 50)->unique()->nullable();
+			$table->string('name', 50)->nullable();
 			$table->string('diploma')->nullable();
 			
 			//auth data
@@ -36,7 +36,6 @@ class CreateUsersTable extends Migration
 			$table->rememberToken();
 			$table->timestamps();
 			$table->softDeletes();
-			
 		});
 	}
 

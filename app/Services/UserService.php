@@ -10,12 +10,14 @@
         private $repository;
         private $validator;
 
-        public function __construct(UserRepository $repository, UserValidator $validator){
+        public function __construct(UserRepository $repository, UserValidator $validator)
+        {
             $this->repository = $repository;
-            $this->validator = $validator;
+            $this->validator  = $validator;
         }
 
-        public function store($data){
+        public function store(array $data)
+        {
             try{
                 $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
                 $user - $this->repository->create($data);

@@ -25,9 +25,9 @@ class CreateSpieciesTable extends Migration
 			$table->string('common_name', 255);
 			$table->string('pic_id');
 			
-			//stranger key
+			//stranger key ??
 			$table->string('authors');
-			
+
             $table->timestamps();
 		});
 	}

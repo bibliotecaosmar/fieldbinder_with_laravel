@@ -16,7 +16,8 @@ class Controller extends BaseController
      * Homepage
      * ==========================================
      */
-    public function home(){
+    public function home()
+    {
         return view('content.home', [
             'title' => 'home'
             ]);
@@ -27,12 +28,18 @@ class Controller extends BaseController
      * Pages of documentation and introdution to website
      * ===================================================x
      */
-    public function guide(){
-        return view('content.documentation.guide');
+    public function guide()
+    {
+        return view('content.documentation.guide', [
+            'title' => 'guide'
+        ]);
     }
 
-    public function ourproposal(){
-        return view('content.documentation.ourproposal');
+    public function ourproposal()
+    {
+        return view('content.documentation.ourproposal', [
+            'title' => 'ourproposal'
+        ]);
     }
 
     /**
@@ -49,40 +56,28 @@ class Controller extends BaseController
     
     public function register()
     {
-        return view('content.user.register');        
+        return view('content.user.register', [
+            'title' => 'register'
+        ]);        
     }
 
     public function profile()
     {
-        return view('content.user.profile');
+        return view('content.user.profile', [
+            'title' => 'profile'
+        ]);
     }
 
     /**
      * =======================================================x
      * Paths of the spiecies catalog
      * =======================================================x
-     */
-    public function plant()
+     */        
+    public function submit()
     {
-        return view('content.catalog.plant');
-    }
-
-    public function animal()
-    {
-        return view('content.catalog.animal');
-    }
-    public function insect()
-    {
-        return view('content.catalog.insect');
-    }
-    public function mushroom()
-    {
-        return view('content.catalog.mushroom');
-    }
-
-    public function spicieInfo()
-    {
-        return view('content.spiecieInfo');        
+        return view('content.catalog.submitData', [
+            'title' => 'submit data'
+        ]);
     }
 
     /**
