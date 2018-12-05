@@ -2,20 +2,20 @@
     <a class="nav-link" href="{{ route('home') }}">home</a>
 </li>
 <li class="nav-item active">
-    <a class="nav-link" href="{{ route('catalog.plant') }}">plant</a>
+    <a class="nav-link" href="{{ route('catalog.spiecies', ['niche' => 'plant']) }}">plant</a>
 </li>
 <li class="nav-item active">
-    <a class="nav-link" href="{{ route('catalog.animal') }}">animal</a>
+    <a class="nav-link" href="{{ route('catalog.spiecies', ['niche' => 'animal']) }}">animal</a>
 </li>
 <li class="nav-item active">
-    <a class="nav-link" href="{{ route('catalog.insect') }}">insect</a>
+    <a class="nav-link" href="{{ route('catalog.spiecies', ['niche' => 'insect']) }}">insect</a>
 </li>
 <li class="nav-item active">
-    <a class="nav-link" href="{{ route('catalog.mushroom') }}">mushroom</a>
+    <a class="nav-link" href="{{ route('catalog.spiecies', ['niche' => 'mushroom']) }}">mushroom</a>
 </li>
 <li class="nav-item active">
-    <a class="nav-link" href="{{ route('catalog.spiecieInfo') }}">spiecie info</a>
+    <a class="nav-link" href="{{ route('catalog.info') }}">spiecie info</a>
 </li>
 <li class="nav-item active">
-    <a class="nav-link" href="{{ route('catalog.submitData') }}">submit data</a>
+    <a class="nav-link" href="{{ route('catalog.lister') }}">submit data</a>
 </li>

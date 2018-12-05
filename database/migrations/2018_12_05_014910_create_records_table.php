@@ -18,14 +18,17 @@ class CreateRecordsTable extends Migration
 		Schema::create('records', function(Blueprint $table) {
 			$table->increments('id');
 			
-			$table->foreign('user_id');
-			$table->foreign('spiecie_id')->nullable();
+			$table->integer('user_id')->unsigned();
+			$table->integer('spiecie_id')->unsigned()->nullable();
 
 			$table->string('spiecie', 255)->nullable();
 			$table->string('niche', 11)->nullable();
 			$table->string('habitat', 255)->nullable();
 			$table->string('common_name', 255)->nullable();
 			$table->string('pic_id')->nullable();
+
+			$table->foreign('user_id')->references('id')->on('users');
+			$table->foreign('spiecie_id')->references('id')->on('spiecies');
 
 			$table->rememberToken();
 			$table->timestamps();
@@ -40,6 +43,11 @@ class CreateRecordsTable extends Migration
 	 */
 	public function down()
 	{
+		Schemar::table('records', function (Blueprint $table){
+			$table->dropForeign('users_user_id_foreign');
+			$table->dropForeign('spiecies_spiecie_id_foreign');
+		});
+		
 		Schema::drop('records');
 	}
 }

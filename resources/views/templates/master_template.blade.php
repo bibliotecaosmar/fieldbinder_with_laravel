@@ -6,8 +6,8 @@
             </nav>
         </div>
         <!-- Tabs of horizon menu -->
-        <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-success"></nav>
+        <div class="container-fluid" id="horizon-menu">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-success">
                 <ul class="navbar-nav mr-auto">
                     @include('templates.horizon-menu')
                     @yield('horizon-view')
@@ -15,7 +15,7 @@
             </nav>        
         </div>
         <!-- Menu for documentation of website (guide, ourproposal, etc...) -->
-        <div class="container-fluid">
+        <div class="container-fluid" id="sidebar">
             <nav class="navbar navbar-expand-lg navbar-dark bg-light">
                 <ul class="navbar-nav mr-auto">
                     @include('templates.sidebar-menu')
@@ -24,7 +24,9 @@
             </nav>
         </div>
         <!-- View contents -->
-        @yield('content-view')
+        <div class="container" id="content-view">
+            @yield('content-view')
+        </div>
         <!-- Contacts and info about the software -->
         @include('templates.footer')
         <script src="{{ asset('vendor/node_modules/jquery/dist/jquery.js') }}"></script>

@@ -12,29 +12,11 @@ use App\Http\Requests\RecordUpdateRequest;
 use App\Repositories\RecordRepository;
 use App\Validators\RecordValidator;
 
-/**
- * Class RecordsController.
- *
- * @package namespace App\Http\Controllers;
- */
 class RecordsController extends Controller
 {
-    /**
-     * @var RecordRepository
-     */
     protected $repository;
-
-    /**
-     * @var RecordValidator
-     */
     protected $validator;
 
-    /**
-     * RecordsController constructor.
-     *
-     * @param RecordRepository $repository
-     * @param RecordValidator $validator
-     */
     public function __construct(RecordRepository $repository, RecordValidator $validator)
     {
         $this->repository = $repository;
