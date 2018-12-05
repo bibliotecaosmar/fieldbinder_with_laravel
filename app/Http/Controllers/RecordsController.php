@@ -23,73 +23,24 @@ class RecordsController extends Controller
         $this->validator  = $validator;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $records = $this->repository->all();
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $records,
-            ]);
-        }
-
-        return view('records.index', compact('records'));
+        //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  RecordCreateRequest $request
-     *
-     * @return \Illuminate\Http\Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     */
     public function store(RecordCreateRequest $request)
     {
-        try {
+        $request = $this->service->store($request->all());
+        $record = $request['success'] ? $request['data'] : null;
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
+        session()->flash('success', [
+            'success' => $request['success'],
+            'message' => $request['message'],
+            ]);
 
-            $record = $this->repository->create($request->all());
-
-            $response = [
-                'message' => 'Record created.',
-                'data'    => $record->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
+        return redirect()->route('spiecie.lister');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $record = $this->repository->find($id);
@@ -104,13 +55,6 @@ class RecordsController extends Controller
         return view('records.show', compact('record'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $record = $this->repository->find($id);
@@ -118,16 +62,6 @@ class RecordsController extends Controller
         return view('records.edit', compact('record'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  RecordUpdateRequest $request
-     * @param  string            $id
-     *
-     * @return Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     */
     public function update(RecordUpdateRequest $request, $id)
     {
         try {
@@ -161,14 +95,6 @@ class RecordsController extends Controller
         }
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $deleted = $this->repository->delete($id);
