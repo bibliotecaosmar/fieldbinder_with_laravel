@@ -17,21 +17,25 @@ class CatalogController extends Controller
         $this->repository_record  = $repository_record;
     }
     
-    public function index($data)
+    public function index(Request $request)
     {
+        $niche = $request->get('niche');
+        $catalog = $this->repository_spiecie;
+        
         return view('content.catalog.catalog', [
             'title'     =>  'catalog',
-            'niche'     =>  $catalog,
-            'catalog'   =>  $catalog
+            'niche'     =>  $spiecie,
+            'catalog'   =>  $spiecie
         ]);
     }
 
     public function catalog(Request $request)
     {
         $this->repository_spiecie->show();
-        $data = [
-            'niche' =>  $request->get('niche') ?? 'plant',
-            'page'  =>  $request->get('page') ?? 1
+        $this->repository_spiecie = [
+            'niche'     =>  $request->get('niche') ?? 'plant',
+            'page'      =>  $request->get('page') ?? 1,
+            'catalog'   =>  $spiecie
         ];
 
 

@@ -1,5 +1,5 @@
 <a class="navbar-brand col-10">
-    <h3 class="">fieldbinder</h3>
+    <label id="logo">fieldbinder</label>
 </a>
 @guest
 <ul class="navbar-nav mr-auto col-2">

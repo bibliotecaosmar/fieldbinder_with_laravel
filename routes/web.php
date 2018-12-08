@@ -50,10 +50,10 @@ Route::resource('user', 'UsersController');
 Route::resource('spiecie', 'SpieciesController');
 Route::resource('record', 'RecordsController');
 
-Route::get('/account', ['as' => 'user.account', 'uses' => 'AccountController@index']);
+Route::get('/account', ['as' => 'user.dashboard', 'uses' => 'DashboardController@index']);
 Route::get('/catalog', ['as' => 'spiecie.lister', 'uses' => 'ListerController@index']);
 
-Route::post('/login', ['as' => 'account.login', 'uses' => 'AccountController@auth']);
+Route::post('/login', ['as' => 'dashboard.login', 'uses' => 'DashboardController@auth']);
 
 /*
 Route::get('/', function () {
