@@ -35,9 +35,9 @@ Route::group(['prefix' => '/user'], function()
 //catalog views
 Route::group(['prefix' => '/catalog'], function()
 {
-    Route::get('/spiecies', ['as' => 'catalog.spiecies', 'uses' => 'CatalogController@catalog']);
-    Route::get('/info', ['as' => 'catalog.info', 'uses' => 'SpiecieController@show']);
-    Route::get('/lister', ['as' => 'catalog.lister', 'uses' => 'Controller@lister']);
+    Route::get('/{$niche}', ['as' => 'catalog.spiecies', 'uses' => 'CatalogController@catalog']);
+    Route::get('/info/{$niche}', ['as' => 'catalog.info', 'uses' => 'SpiecieController@show']);
+    Route::get('/lister/{$niche}', ['as' => 'catalog.lister', 'uses' => 'Controller@lister']);
 });
 /**
  * 

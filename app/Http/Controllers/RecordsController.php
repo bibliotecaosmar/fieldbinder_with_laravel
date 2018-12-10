@@ -14,13 +14,11 @@ use App\Validators\RecordValidator;
 
 class RecordsController extends Controller
 {
-    protected $repository;
     protected $validator;
 
-    public function __construct(RecordRepository $repository, RecordValidator $validator)
+    public function __construct(RecordService $service)
     {
-        $this->repository = $repository;
-        $this->validator  = $validator;
+        $this->service  = $service;
     }
 
     public function index()

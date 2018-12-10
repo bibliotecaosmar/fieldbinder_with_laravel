@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use App\Validators\UserValidator;
+use App\Exceptions\FillerException;
+use App\Services\IHash;
 use Auth;
 use Exception;
 
@@ -12,12 +14,12 @@ class DashboardController extends Controller
 {
     private $repository;
     private $validator;
-    private $messages = [];
+    private $exception;
 
     public function __construct(UserRepository $repository, UserValidator $validator)
     {
-        $this->repository = $repository;
-        $this->validator  = $validator;
+        $this->repository   = $repository;
+        $this->validator    = $validator;
     }
 
     public function index()
@@ -25,7 +27,7 @@ class DashboardController extends Controller
         return redirect()->route('home');
     }
 
-    public function auth(Request $request)
+    public function auth(Request $request, IHash $hash, FillerException $exception)
     {
         $data = [
             'email'    => $request->get('email'),
@@ -35,29 +37,23 @@ class DashboardController extends Controller
         try
         {
             if(env('PASSWORD_HASH'))
-            {                
+            {
                 Auth::attempt($data);
                 return redirect()->route('user.dashboard');
             }
             $user = $this->repository->findWhere(['email' => $request->get('email')])->first();
-                
-            if($user->email !== $request->get('email'))
-                array_push($this->messages, "invalid email");
-            if($user->password !== $request->get('password'))
-                array_push($this->messages, "invalid password");
-
-            if(isset($this->messages[0]))
+            $message = $hash->manual($user, $data);
+            if(isset($message))
                 return redirect()->route('user.login', [
-                    'messages'  =>  $this->messages
+                    'messages'  =>  $messages
                 ]);
-            return redirect()->route('user.dashboard');            
+            return redirect()->route('user.dashboard');     
         }
         catch(Exception $e)
         {
             return redirect()->route('user.login', [
-                'error'   => $e->getMessage()
+                'error'   => $this->exception->leach($e)
             ]);
-        
         }
     }
 }

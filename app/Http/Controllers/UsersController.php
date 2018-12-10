@@ -17,12 +17,9 @@ class UsersController extends Controller
 {
     protected $service;
 
-    protected $repository;
-
-    public function __construct(UserRepository $repository, UserService $service)
+    public function __construct(UserService $service)
     {
-        $this->service    = $service;
-        $this->repository = $repository;
+        $this->service  = $service;
     }
 
     /**

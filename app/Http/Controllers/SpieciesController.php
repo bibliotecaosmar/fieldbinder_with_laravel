@@ -14,13 +14,11 @@ use App\Validators\SpiecieValidator;
 
 class SpieciesController extends Controller
 {
-    protected $repository;
-    protected $validator;
+    protected $service;
 
-    public function __construct(SpiecieRepository $repository, SpiecieValidator $validator)
+    public function __construct(SpiecieService $service)
     {
-        $this->repository   = $repository;
-        $this->validator    = $validator;
+        $this->service  = $service;
     }
 
     public function index()
