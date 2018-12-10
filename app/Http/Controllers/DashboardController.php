@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use App\Validators\UserValidator;
 use App\Exceptions\FillerException;
-use App\Services\IHash;
+use App\Services\DashboardService;
 use Auth;
 use Exception;
 
@@ -27,7 +27,7 @@ class DashboardController extends Controller
         return redirect()->route('home');
     }
 
-    public function auth(Request $request, IHash $hash, FillerException $exception)
+    public function auth(Request $request, DashboardService $dash, FillerException $exception)
     {
         $data = [
             'email'    => $request->get('email'),
@@ -42,7 +42,7 @@ class DashboardController extends Controller
                 return redirect()->route('user.dashboard');
             }
             $user = $this->repository->findWhere(['email' => $request->get('email')])->first();
-            $message = $hash->manual($user, $data);
+            $message = $dash->manual($user, $data);
             if(isset($message))
                 return redirect()->route('user.login', [
                     'messages'  =>  $messages
@@ -52,7 +52,7 @@ class DashboardController extends Controller
         catch(Exception $e)
         {
             return redirect()->route('user.login', [
-                'error'   => $this->exception->leach($e)
+                'error'   => $exception->leach($e)
             ]);
         }
     }

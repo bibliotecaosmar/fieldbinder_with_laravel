@@ -14,5 +14,13 @@
         </div>
     @endfor
     
-
+    @if(isset($messages[0]))
+        <div class="container">
+            @foreach($messages as $message)
+                <div class="row">
+                    {{ $message }}
+                </div>
+            @endforeach
+        </div>
+    @endif
 @endsection

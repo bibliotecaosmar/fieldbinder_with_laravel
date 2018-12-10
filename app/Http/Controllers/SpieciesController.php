@@ -23,17 +23,7 @@ class SpieciesController extends Controller
 
     public function index()
     {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $spiecies = $this->repository->all();
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $spiecies,
-            ]);
-        }
-
-        return view('spiecies.index', compact('spiecies'));
+        return redirect()->route('');
     }
 
     /**

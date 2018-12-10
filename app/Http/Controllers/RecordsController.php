@@ -21,9 +21,11 @@ class RecordsController extends Controller
         $this->service  = $service;
     }
 
-    public function index()
+    public function index($messsages, $error)
     {
-        //
+        return view('content.catalog.catalog', [
+            'messages'  =>  $messages
+        ]);
     }
 
     public function store(RecordCreateRequest $request)
@@ -36,7 +38,9 @@ class RecordsController extends Controller
             'message' => $request['message'],
             ]);
 
-        return redirect()->route('spiecie.lister');
+        return redirect()->route('recods.index', [
+            'messages'  =>  $record['message']
+        ]);
     }
 
     public function show($id)

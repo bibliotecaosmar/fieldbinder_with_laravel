@@ -27,18 +27,9 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($auth)
     {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $users = $this->repository->all();
-
-        if (request()->wantsJson()) {
-            return response()->json([
-                'data' => $users,
-            ]);
-        }
-
-        return view('users.index', compact('users'));
+        return redirect()->route('dashboard.login', ['data' => $auth]);
     }
 
     /**
@@ -60,7 +51,11 @@ class UsersController extends Controller
                             'message' => $request['message'],
                             ]);
 
-        return redirect()->route('user.account');
+        $credentials = [
+            'email'     =>  $request->get('email'),
+            'password'  =>  $request->get('password')
+        ];
+        return redirect()->route('user.dashboard', ['auth'  =>  $credentials]);
     }
 
     /**

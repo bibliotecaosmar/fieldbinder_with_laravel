@@ -11,7 +11,7 @@
         @include('templates.form.submit', ['input' => 'submit', 'class' => 'default-button'])
     {!! Form::close() !!}
 
-    <div>
+    <div class="container">
         {{ $error ?? null}}
     </div>
 

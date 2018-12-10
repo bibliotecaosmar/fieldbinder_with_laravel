@@ -47,11 +47,10 @@ class Controller extends BaseController
      * Paths to user's featuries
      * =======================================================x
      */
-    public function login($messages = null)
+    public function login()
     {
         return view('content.user.login', [
             'title'     => 'login',
-            'messages'  => $messages
         ]);
     }
     
