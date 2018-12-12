@@ -4,6 +4,7 @@
     use Prettus\Validator\Contracts\ValidatorInterface;
     use App\Repositories\UserRepository;
     use App\Validators\UserValidator;
+    use Exception;
 
     class UserService
     {
@@ -12,8 +13,8 @@
 
         public function __construct(UserRepository $repository, UserValidator $validator)
         {
-            $this->repository = $repository;
-            $this->validator  = $validator;
+            $this->repository   = $repository;
+            $this->validator    = $validator;
         }
 
         public function store(array $data)
@@ -21,6 +22,7 @@
             try{
                 $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
                 $user = $this->repository->create($data);
+                dd($user);
                 return [
                     'success' => true,
                     'message' => "User registered",

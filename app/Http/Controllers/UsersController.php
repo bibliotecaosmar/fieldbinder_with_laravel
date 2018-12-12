@@ -9,8 +9,6 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Repositories\UserRepository;
-use App\Validators\UserValidator;
 use App\Services\UserService;
 
 class UsersController extends Controller
@@ -27,20 +25,11 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($auth)
+    public function index()
     {
-        return redirect()->route('dashboard.login', ['data' => $auth]);
+        return redirect()->route('dashboard.auth');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  UserCreateRequest $request
-     *
-     * @return \Illuminate\Http\Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     */
     public function store(UserCreateRequest $request)
     {
         $request = $this->service->store($request->all());
@@ -50,12 +39,8 @@ class UsersController extends Controller
                             'success' => $request['success'],
                             'message' => $request['message'],
                             ]);
-
-        $credentials = [
-            'email'     =>  $request->get('email'),
-            'password'  =>  $request->get('password')
-        ];
-        return redirect()->route('user.dashboard', ['auth'  =>  $credentials]);
+        
+        return redirect()->route('dashboard.auth', ['user' => $user]);
     }
 
     /**

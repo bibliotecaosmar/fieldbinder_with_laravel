@@ -4,7 +4,7 @@
 @guest
 <ul class="navbar-nav mr-auto col-2">
     <li class="nav-item active">
-        <a class="nav-link" href="{{ route('user.login') }}">Signin</a>
+        <a class="nav-link" href="{{ route('dashboard.login') }}">Signin</a>
     </li>
     <li class="nav-item active">
         or
@@ -21,12 +21,12 @@
 </div>
 <label class="user">{{ auth()->nickname ?? auth()->name }}</label>
 <div>
-    <a href="{{ route('content.profile') }}">
+    <a href="{{ route('dashboard.profile') }}">
         <i class="dropdown-button"></i>
         <label>Profile</label>
     </a>
     @auth('adm')
-    <a href="{{ route('adm.manager') }}">
+    <a href="{{ route('dashboard.manager') }}">
         <i class="dropdown-button"></i>
         <label>Manage Users</label>
     </a>

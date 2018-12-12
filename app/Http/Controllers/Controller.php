@@ -19,9 +19,9 @@ class Controller extends BaseController
     public function home()
     {
         return view('content.home', [
-            'title' => 'home'
-            ]);
-        }
+            'title'     => 'home'
+        ]);
+    }
 
     /**
      * ===================================================x
@@ -44,27 +44,39 @@ class Controller extends BaseController
 
     /**
      * =======================================================x
-     * Paths to user's featuries
+     * Catalog of Spiecies
      * =======================================================x
      */
-    public function login()
+    public function catalog()
     {
-        return view('content.user.login', [
-            'title'     => 'login',
+        return view('content.catalog.catalog', [
+            'title' =>  'Catalog - '
         ]);
     }
-    
+
+    /**
+     * =======================================================x
+     * Paths to user's featuries
+     * =======================================================x
+     */    
+    public function login(){
+
+        return view('content.user.login', [
+            'title' => 'login'
+        ]);
+    }
+
     public function register()
     {
         return view('content.user.register', [
-            'title' => 'register'
-        ]);        
+            'title' =>  'register',
+        ]);
     }
 
     public function profile()
     {
-        return view('content.user.profile', [
-            'title' => 'profile'
+        return view('content.user.profiler', [
+            'title'         => 'Profile - '
         ]);
     }
 

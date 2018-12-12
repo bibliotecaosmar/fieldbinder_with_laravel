@@ -11,9 +11,11 @@
         @include('templates.form.submit', ['input' => 'submit', 'class' => 'default-button'])
     {!! Form::close() !!}
 
-    <div class="container">
-        {{ $error ?? null}}
-    </div>
+    @if(isset($error))
+        <div class="container">
+            {{ $error }}
+        </div>
+    @endif
 
     @if(isset($messages[0]))
         @foreach($messages as $message)

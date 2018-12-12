@@ -5,9 +5,16 @@
 @endsection
 
 @section('content-view')
-
     @if(session('success'))
         <h3>{{ session('success')['messages'] }}</h3>
+    @endif
+
+    @if(isset($message[0]))
+        @foreach($message as $messages)
+            <div>
+                {{ $message }}
+            </div>
+        @endforeach
     @endif
 
     {!! Form::open(['route' => 'user.store', 'method' => 'post']) !!}

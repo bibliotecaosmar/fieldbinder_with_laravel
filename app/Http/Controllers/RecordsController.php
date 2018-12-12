@@ -9,8 +9,7 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\RecordCreateRequest;
 use App\Http\Requests\RecordUpdateRequest;
-use App\Repositories\RecordRepository;
-use App\Validators\RecordValidator;
+use App\Services\RecordService;
 
 class RecordsController extends Controller
 {
@@ -21,11 +20,9 @@ class RecordsController extends Controller
         $this->service  = $service;
     }
 
-    public function index($messsages, $error)
+    public function index()
     {
-        return view('content.catalog.catalog', [
-            'messages'  =>  $messages
-        ]);
+        return redirect()->route('catalog.spiecies');
     }
 
     public function store(RecordCreateRequest $request)
@@ -35,7 +32,7 @@ class RecordsController extends Controller
 
         session()->flash('success', [
             'success' => $request['success'],
-            'message' => $request['message'],
+            'message' => $request['message']
             ]);
 
         return redirect()->route('recods.index', [
@@ -66,35 +63,15 @@ class RecordsController extends Controller
 
     public function update(RecordUpdateRequest $request, $id)
     {
-        try {
+        $request = $this->service->store($request->all());
+        $record = $request['success'] ? $request['data'] : null;
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+        session()->flash('success', [
+            'success' => $request['success'],
+            'message' => $request['message'],
+            ]);
 
-            $record = $this->repository->update($request->all(), $id);
-
-            $response = [
-                'message' => 'Record updated.',
-                'data'    => $record->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-
-            if ($request->wantsJson()) {
-
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
+        return redirect()->route('record.index');
     }
 
     public function destroy($id)

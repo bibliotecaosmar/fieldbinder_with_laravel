@@ -23,7 +23,18 @@ class SpieciesController extends Controller
 
     public function index()
     {
-        return redirect()->route('');
+        return redirect()->route('catalog.spiecies');
+    }
+
+    public function catalog($niche)
+    {
+        $catalog = $repository->getCatalog($niche);
+
+        session()->flash('catalog', [
+            'catalog'   =>  $catalog
+        ]);
+
+        return redirect()->route('catalog.spiecies');
     }
 
     /**
@@ -37,33 +48,15 @@ class SpieciesController extends Controller
      */
     public function store(SpiecieCreateRequest $request)
     {
-        try {
+        $request = $this->service->store($request->all());
+        $user = $request['success'] ? $request['data'] : null;
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
+        session()->flash('success', [
+                            'success' => $request['success'],
+                            'message' => $request['message'],
+                            ]);
 
-            $spiecie = $this->repository->create($request->all());
-
-            $response = [
-                'message' => 'Spiecie created.',
-                'data'    => $spiecie->toArray(),
-            ];
-
-            if ($request->wantsJson()) {
-
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
+        return redirect()->route('user.dashboard', ['auth'  =>  $credentials]);
     }
 
     /**
