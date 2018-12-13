@@ -19,7 +19,7 @@ class Controller extends BaseController
     public function home()
     {
         return view('content.home', [
-            'title'     => 'home'
+            'title'     => 'Home - Fieldbinder'
         ]);
     }
 
@@ -31,14 +31,14 @@ class Controller extends BaseController
     public function guide()
     {
         return view('content.documentation.guide', [
-            'title' => 'guide'
+            'title' => 'Guide - Fieldbinder'
         ]);
     }
 
     public function ourproposal()
     {
         return view('content.documentation.ourproposal', [
-            'title' => 'ourproposal'
+            'title' => 'Ourproposal - Fieldbinder'
         ]);
     }
 
@@ -50,7 +50,7 @@ class Controller extends BaseController
     public function catalog()
     {
         return view('content.catalog.catalog', [
-            'title' =>  'Catalog - '
+            'title' =>  'Catalog - Fieldbinder'
         ]);
     }
 
@@ -62,33 +62,33 @@ class Controller extends BaseController
     public function login(){
 
         return view('content.user.login', [
-            'title' => 'login'
+            'title' => 'Login - Fieldbinder'
         ]);
     }
 
     public function register()
     {
         return view('content.user.register', [
-            'title' =>  'register',
+            'title' =>  'Register - Fieldbinder',
         ]);
     }
 
     public function profile()
     {
         return view('content.user.profiler', [
-            'title'         => 'Profile - '
+            'title'         => 'Profile - Fieldbinder'
         ]);
     }
 
     /**
      * =======================================================x
      * Paths of the spiecies catalog
-     * =======================================================x
+     * ==========================================s=============x
      */        
     public function submit()
     {
         return view('content.catalog.submitData', [
-            'title' => 'submit data'
+            'title' => 'Submit data - Fieldbinder'
         ]);
     }
 

@@ -9,8 +9,7 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\SpiecieCreateRequest;
 use App\Http\Requests\SpiecieUpdateRequest;
-use App\Repositories\SpiecieRepository;
-use App\Validators\SpiecieValidator;
+use App\Services\SpiecieService;
 
 class SpieciesController extends Controller
 {
@@ -26,12 +25,14 @@ class SpieciesController extends Controller
         return redirect()->route('catalog.spiecies');
     }
 
-    public function catalog($niche)
+    public function catalog($niche, $page = 1)
     {
-        $catalog = $repository->getCatalog($niche);
+        $model = $service->model($niche, $page);
 
         session()->flash('catalog', [
-            'catalog'   =>  $catalog
+            'niche'     =>  $model['niche'],
+            'page'      =>  $model['page'],
+            'catalog'   =>  $model['catalog']
         ]);
 
         return redirect()->route('catalog.spiecies');

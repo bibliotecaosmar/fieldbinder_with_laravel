@@ -22,7 +22,6 @@
             try{
                 $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
                 $user = $this->repository->create($data);
-                dd($user);
                 return [
                     'success' => true,
                     'message' => "User registered",

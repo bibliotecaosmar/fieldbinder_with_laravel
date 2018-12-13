@@ -18,15 +18,29 @@
             $this->validator    = $validator;
         }
 
-        public function getCatalog($niche)
+        public function model($data, $page)
         {
             try
             {
+                $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_MODEL);
                 
+                /**
+                 * repository method to page
+                 */
+                $model = $this->repository->find($data);
+
+                return [
+                    'niche'     =>  $model['niche'],
+                    'page'      =>  $page,
+                    'catalog'   =>  $model['catalog']
+                ];
             }
             catch(Exception $e)
             {
-
+                return [
+                    'niche' => $niche,
+                    'catalog' => 'Nothing found'
+                ];
             }
         }
 
@@ -35,6 +49,7 @@
             try{
                 $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
                 $user = $this->repository->create($data);
+                
                 return [
                     'success' => true,
                     'message' => "User registered",

@@ -19,11 +19,11 @@ class CreateSpieciesTable extends Migration
             $table->increments('id');
 
 			//data about spiecie
-			$table->string('spiecie', 255);
+			$table->string('spiecie', 55);
 			$table->string('niche', 11);
-			$table->string('habitat', 255);
-			$table->string('common_name', 255);
-			$table->string('pic_id');
+			$table->string('habitat', 55);
+			$table->string('common_name', 55);
+			$table->string('pic_id', 255);
 			
 			//stranger key ??
 			$table->string('authors');

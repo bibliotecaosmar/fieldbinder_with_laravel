@@ -27,9 +27,8 @@ class DashboardController extends Controller
         session()->flash('success', [
             'success'   =>  $request['sucess'],
             'message'   =>  $request['message'],
-            'user'      =>  $request['data']
         ]);
         
-        return redirect()->route('user.dashboard');
+        return $request['success'] ? redirect()->route('user.dashboard') : redirect()->route('user.login');
     }
 }

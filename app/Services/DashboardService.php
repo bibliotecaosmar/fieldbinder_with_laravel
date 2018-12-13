@@ -25,12 +25,11 @@
                 if(env('PASSWORD_HASH'))
                 {
                     Auth::attempt($data);
-                    session()->flash('success', [
+                    return [
                         'success'   => true,
-                        'message'   => 'Success at subscription',
+                        'message'   => 'logged',
                         'data'      => $data
-                    ]);
-                    return redirect()->route('user.dashboard');
+                    ];
                 }
                 $user = $this->repository->findWhere(['email' => $data['email']])->first();
                 
@@ -41,14 +40,17 @@
                 
                 if(isset($messages[0]))
                 {
-                    session()->flash('success', [
+                    return [
                         'success' => false,
                         'message' => $messsages
-                    ]);
-                    return redirect()->route('user.login');
+                    ];
                 }
 
-                return redirect()->route('user.dashboard');     
+                return [
+                    'success'   => true,
+                    'message'   => 'logged',
+                    'data'      => $data
+                ];
             }
             catch(Exception $e)
             {

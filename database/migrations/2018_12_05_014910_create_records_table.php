@@ -18,14 +18,14 @@ class CreateRecordsTable extends Migration
 		Schema::create('records', function(Blueprint $table) {
 			$table->increments('id');
 			
-			$table->integer('user_id')->unsigned();
-			$table->integer('spiecie_id')->unsigned()->nullable();
+			$table->unsignedInteger('user_id');
+			$table->unsignedInteger('spiecie_id')->nullable();
 
-			$table->string('spiecie', 255)->nullable();
+			$table->string('spiecie', 55)->nullable();
 			$table->string('niche', 11)->nullable();
-			$table->string('habitat', 255)->nullable();
-			$table->string('common_name', 255)->nullable();
-			$table->string('pic_id')->nullable();
+			$table->string('habitat', 55)->nullable();
+			$table->string('common_name', 55)->nullable();
+			$table->string('pic_id', 255)->nullable();
 
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->foreign('spiecie_id')->references('id')->on('spiecies');

@@ -22,5 +22,8 @@ class SpiecieValidator extends LaravelValidator
             'pic_id' => 'required'
         ],
         ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_MODEL  => [
+            'niche' =>  'exists:spiecie,niche'
+        ]
     ];
 }
