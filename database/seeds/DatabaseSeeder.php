@@ -13,6 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $niche = ['plant', 'animal', 'insect', 'mushroom'];
+
+        foreach($niche as $n){
+            Niche::create([
+                'niche'         => $n
+            ]);
+        }
+
         User::create([
             'nickname'      => '',
             'birth'         => '0304-02-01',

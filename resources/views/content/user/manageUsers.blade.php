@@ -20,19 +20,20 @@
                         <td>Permission</td>
                     </tr>
                 </thead>
-                @foreach($users as user)
+                @forelse($users as user)
                     <tbody>
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->nickname ?? $user->name }}</td>
                             <td>{{ $user->birth }}</td>
-                            <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->password }}</td>
+                            <td>{{ $user->diploma }}</td>
                             <td>{{ $user->permission }}</td>
                         </tr>
                     </tbody>
-                @endforeach
+                    @empty
+                    <h2>None Users</h2>
+                @endforelse
             </table>
         </div>
     </div>

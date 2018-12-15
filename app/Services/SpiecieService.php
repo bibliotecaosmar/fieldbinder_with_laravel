@@ -5,6 +5,7 @@
     use App\Repositories\RecordRepository;
     use App\Repositories\SpiecieRepository;
     use App\Validators\SpiecieValidator;
+    use App\Validators\NicheValidator;
     use Exception;
 
     class SpiecieService
@@ -12,27 +13,24 @@
         private $repository;
         private $validator;
 
-        public function __construct(SpiecieRepository $repository, SpiecieValidator $validator)
+        public function __construct(SpiecieRepository $repository, SpiecieValidator $validator, NicheValidator $validator_niche)
         {
-            $this->repository   = $repository;
-            $this->validator    = $validator;
+            $this->repository_spiecie   = $repository_spiecie;
+            $this->validator_spiecie    = $validator_spiecie;
+            $this->validator_niche      = $validator_niche;
         }
 
-        public function model($data, $page)
+        public function catalog($niche, $page)
         {
             try
             {
-                $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_MODEL);
-                
-                /**
-                 * repository method to page
-                 */
-                $model = $this->repository->find($data);
+                $this->validator_niche->with($niche)->passesOrFail(ValidatorInterface::RULE_MODEL);
+                $model = $this->repository->orderBy('id', 'desc')->skip(($page-1)*9)->take(9)->get();
 
                 return [
-                    'niche'     =>  $model['niche'],
+                    'niche'     =>  $niche,
                     'page'      =>  $page,
-                    'catalog'   =>  $model['catalog']
+                    'catalog'   =>  $model
                 ];
             }
             catch(Exception $e)

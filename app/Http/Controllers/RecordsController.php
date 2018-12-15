@@ -25,6 +25,17 @@ class RecordsController extends Controller
         return redirect()->route('catalog.spiecies');
     }
 
+    public function survey()
+    {
+        $survey = $this->service->survey();
+
+        session()->flash('survey', [
+            'survey' => $survey
+        ]);
+
+        return redirect()->route('spiecies.catalog');
+    }
+
     public function store(RecordCreateRequest $request)
     {
         $request = $this->service->store($request->all());

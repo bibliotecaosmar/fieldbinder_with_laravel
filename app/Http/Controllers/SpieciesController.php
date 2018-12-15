@@ -27,7 +27,7 @@ class SpieciesController extends Controller
 
     public function catalog($niche, $page = 1)
     {
-        $model = $service->model($niche, $page);
+        $model = $service->catalog($niche, $page);
 
         session()->flash('catalog', [
             'niche'     =>  $model['niche'],

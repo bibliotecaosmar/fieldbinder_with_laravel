@@ -29,7 +29,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'pic', 'diploma', 'status', 'permission', 'rememberToken'
+        'password', 'pic', 'diploma', 'status', 'rememberToken'
     ];
 
     public function setPasswordAttribute($value)

@@ -6,11 +6,11 @@ use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 
 /**
- * Class SpiecieValidator.
+ * Class NicheValidator.
  *
  * @package namespace App\Validators;
  */
-class SpiecieValidator extends LaravelValidator
+class NicheValidator extends LaravelValidator
 {
     /**
      * Validation Rules
@@ -18,9 +18,8 @@ class SpiecieValidator extends LaravelValidator
      * @var array
      */
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [
-            'pic_id' => 'required'
-        ],
-        ValidatorInterface::RULE_UPDATE => []
+        ValidatorInterface::RULE_MODEL  => [
+            'niche' =>  'exists:spiecie,niche'
+        ]
     ];
 }

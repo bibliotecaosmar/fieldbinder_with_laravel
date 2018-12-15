@@ -22,7 +22,7 @@ class Spiecie extends Model implements Transformable
      * @var array
      */
     protected $fillable = [
-        'spiecie', 'niche', 'habitat', 'common_name', 'pic_id', 'authors'
+        'spiecie', 'niche_id', 'habitat', 'common_name', 'pic_id', 'authors'
     ];
 
     /**
@@ -31,4 +31,9 @@ class Spiecie extends Model implements Transformable
      * @var array
      */
     protected $hidden = [];
+
+    public function niches()
+    {
+        return $this->belongTo(Spiecie::class);
+    }
 }

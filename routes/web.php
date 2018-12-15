@@ -12,8 +12,8 @@
 */
 
 /**
- * 
- * 
+ *
+ *
  *  *Routes that get the view*
  *
  */
@@ -28,24 +28,24 @@ Route::get('/register', ['as' => 'user.register', 'uses' => 'Controller@register
 Route::group(['prefix' => '/documentation'], function()
 {
     Route::get('/guide', ['as' => 'documentation.guide', 'uses' => 'Controller@guide']);
-    Route::get('/ourproposal', ['as' => 'documentation.ourproposal', 'uses' => 'Controller@ourproposal']);    
+    Route::get('/ourproposal', ['as' => 'documentation.ourproposal', 'uses' => 'Controller@ourproposal']);
 });
 
 /**
- * 
+ *
  *  *Catalog Views*
- * 
+ *
  */
 Route::group(['prefix' => '/catalog'], function()
 {
-    Route::get('/{$niche}', ['as' => 'catalog.spiecies', 'uses' => 'SpieciesController@catalog']);
+    Route::get('/{$niche}/{$page}', ['as' => 'catalog.spiecies', 'uses' => 'SpieciesController@catalog']);
     Route::get('/info/{$niche}', ['as' => 'catalog.info', 'uses' => 'Controller@spiecie']);
     Route::get('/lister/{$niche}', ['as' => 'catalog.lister', 'uses' => 'Controller@lister']);
 });
 
 /**
- * 
- * 
+ *
+ *
  *  *Resources*
  *
  */
@@ -54,21 +54,21 @@ Route::resource('spiecie', 'SpieciesController');
 Route::resource('record', 'RecordsController');
 
 /**
- * 
- * 
+ *
+ *
  *  *Redirects of method*
- * 
+ *
  */
 Route::get('/logged', ['as' => 'user.dashboard', 'uses' => 'DashboardController@index', ]);
 Route::get('/catalog', ['as' => 'spiecie.lister', 'uses' => 'CatalogController@index']);
 
 /**
- * 
- *  *Authenticate*
- * 
+ *
+ *  *Post routes*
+ *
  */
 Route::post('/authenticating', ['as' => 'dashboard.login', 'uses' => 'DashboardController@auth']);
-
+Route::post('/vote', ['as' => 'survey.vote', 'uses' => 'SurveyController@vote']);
 /*
 Route::get('/', function () {
     return view('welcome');

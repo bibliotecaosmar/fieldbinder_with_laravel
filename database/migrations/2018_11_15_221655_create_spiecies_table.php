@@ -20,11 +20,13 @@ class CreateSpieciesTable extends Migration
 
 			//data about spiecie
 			$table->string('spiecie', 55);
-			$table->string('niche', 11);
+			$table->unsignedInteger('niche_id');
 			$table->string('habitat', 55);
 			$table->string('common_name', 55);
 			$table->string('pic_id', 255);
-			
+
+			$table->foreign('niche_id')->references('id')->on('niches');
+
 			//stranger key ??
 			$table->string('authors');
 

@@ -39,7 +39,7 @@ class UsersController extends Controller
                             'success' => $request['success'],
                             'message' => $request['message'],
                             ]);
-        
+
         return redirect()->route('dashboard.auth', ['user' => $user]);
     }
 
