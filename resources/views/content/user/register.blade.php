@@ -5,27 +5,36 @@
 @endsection
 
 @section('content-view')
-    @if(session('success'))
-        <h3>{{ session('success')['messages'] }}</h3>
-    @endif
-
-    @if(isset($message[0]))
-        @foreach($message as $messages)
-            <div>
-                {{ $message }}
-            </div>
-        @endforeach
-    @endif
-
     {!! Form::open(['route' => 'user.store', 'method' => 'post']) !!}
         <div class="form-group">
-            @include('templates.form.input', ['input' => 'nickname', 'attributes' => ['class' => 'form-control', 'placeholder' => 'nickname']])
-            @include('templates.form.date', ['input' => 'birth', 'class' => 'form-default', 'attributes' => ['class' => 'form-control', 'placeholder' => '01/01/1900']])
-            @include('templates.form.input', ['input' => 'email', 'class' => 'form-default', 'attributes' => ['class' => 'form-control', 'placeholder' => 'email']])
-            @include('templates.form.password', ['input' => 'password', 'class' => 'form-default', 'attributes' => ['class' => 'form-control', 'placeholder' => 'password']])
-            @include('templates.form.input', ['input' => 'name', 'class' => 'form-default', 'attributes' => ['class' => 'form-control', 'placeholder' => 'name']])
-            @include('templates.form.file', ['input' => 'diploma', 'class' => 'form-default', 'attributes' => ['class' => 'form-control', 'placeholder' => 'file.pdf']])
-            @include('templates.form.submit', ['input' => 'submit', 'class' => 'form-default', 'class' => 'btn btn-primary'])
+            @include('templates.form.input', [
+                        'input'         => 'nickname',
+                        'attributes'    => ['placeholder' => 'nickname']
+                        ])
+            @include('templates.form.date', [
+                        'input'         => 'birth',
+                        'attributes'    => ['placeholder' => '01/01/1900']
+                        ])
+            @include('templates.form.input', [
+                        'input'         => 'email',
+                        'attributes'    => ['placeholder' => 'email']
+                        ])
+            @include('templates.form.password', [
+                        'input'         => 'password',
+                        'attributes'    => ['placeholder' => 'password']
+                        ])
+            @include('templates.form.input', [
+                        'input'         => 'name',
+                        'attributes'    => ['placeholder' => 'name']
+                        ])
+            @include('templates.form.file', [
+                        'input'         => 'diploma',
+                        'attributes'    => ['placeholder' => 'file.pdf']
+                        ])
+            @include('templates.form.submit', [
+                        'input'         => 'submit',
+                        'class'         => 'btn btn-primary'
+                        ])
         </div>
     {!! Form::close() !!}
 @endsection

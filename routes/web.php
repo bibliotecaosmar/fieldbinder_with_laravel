@@ -38,7 +38,7 @@ Route::group(['prefix' => '/documentation'], function()
  */
 Route::group(['prefix' => '/catalog'], function()
 {
-    Route::get('/{$niche}/{$page}', ['as' => 'catalog.spiecies', 'uses' => 'SpieciesController@catalog']);
+    Route::get('/{niche}/{page}', ['as' => 'catalog.spiecies', 'uses' => 'Controller@catalog']);
     Route::get('/info/{$niche}', ['as' => 'catalog.info', 'uses' => 'Controller@spiecie']);
     Route::get('/lister/{$niche}', ['as' => 'catalog.lister', 'uses' => 'Controller@lister']);
 });
@@ -60,7 +60,7 @@ Route::resource('record', 'RecordsController');
  *
  */
 Route::get('/logged', ['as' => 'user.dashboard', 'uses' => 'DashboardController@index', ]);
-Route::get('/catalog', ['as' => 'spiecie.lister', 'uses' => 'CatalogController@index']);
+Route::get('/catalog', ['as' => 'spiecie.lister', 'uses' => 'SpiecieController@indexer'])
 
 /**
  *

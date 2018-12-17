@@ -25,9 +25,9 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return redirect()->route('dashboard.auth');
+        return redirect()->route('user.show', $id);
     }
 
     public function store(UserCreateRequest $request)
@@ -36,11 +36,12 @@ class UsersController extends Controller
         $user = $request['success'] ? $request['data'] : null;
 
         session()->flash('success', [
-                            'success' => $request['success'],
-                            'message' => $request['message'],
+                            'success'   => $request['success'],
+                            'message'   => $request['message'],
+                            'user'      => $user
                             ]);
 
-        return redirect()->route('dashboard.auth', ['user' => $user]);
+        return redirect()->route('dashboard.auth');
     }
 
     /**
@@ -54,14 +55,11 @@ class UsersController extends Controller
     {
         $user = $this->repository->find($id);
 
-        if (request()->wantsJson()) {
+        session()->flash('profile', [
+            'user'  =>  $use
+        ])
 
-            return response()->json([
-                'data' => $user,
-            ]);
-        }
-
-        return view('users.show', compact('user'));
+        return redirect()->route('user.index');
     }
 
     /**

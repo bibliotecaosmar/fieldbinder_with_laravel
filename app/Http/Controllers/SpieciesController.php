@@ -25,9 +25,9 @@ class SpieciesController extends Controller
         return redirect()->route('catalog.spiecies');
     }
 
-    public function catalog($niche, $page = 1)
+    public function indexer($niche, $page = 1)
     {
-        $model = $service->catalog($niche, $page);
+        $model = $service->indexer($niche, $page);
 
         session()->flash('catalog', [
             'niche'     =>  $model['niche'],
@@ -35,7 +35,7 @@ class SpieciesController extends Controller
             'catalog'   =>  $model['catalog']
         ]);
 
-        return redirect()->route('catalog.spiecies');
+        return redirect()->route('catalog.spiecies', $model['niche'], $model['page']);
     }
 
     /**

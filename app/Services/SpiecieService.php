@@ -20,8 +20,10 @@
             $this->validator_niche      = $validator_niche;
         }
 
-        public function catalog($niche, $page)
+        public function indexer($niche, $page)
         {
+            $niche = ['niche' => $niche];
+
             try
             {
                 $this->validator_niche->with($niche)->passesOrFail(ValidatorInterface::RULE_MODEL);
@@ -47,7 +49,7 @@
             try{
                 $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
                 $user = $this->repository->create($data);
-                
+
                 return [
                     'success' => true,
                     'message' => "User registered",
@@ -66,14 +68,14 @@
                     'message' => 'require failed'
                 ];
             }
-        }    
-        
+        }
+
         public function update()
         {
 
         }
         public function delete()
         {
-            
+
         }
     }

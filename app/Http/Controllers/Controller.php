@@ -58,7 +58,7 @@ class Controller extends BaseController
      * =======================================================x
      * Paths to user's featuries
      * =======================================================x
-     */    
+     */
     public function login(){
 
         return view('content.user.login', [
@@ -84,11 +84,11 @@ class Controller extends BaseController
      * =======================================================x
      * Paths of the spiecies catalog
      * ==========================================s=============x
-     */        
-    public function submit()
+     */
+    public function lister()
     {
-        return view('content.catalog.submitData', [
-            'title' => 'Submit data - Fieldbinder'
+        return view('content.catalog.lister', [
+            'title' => 'Lister - Fieldbinder'
         ]);
     }
 

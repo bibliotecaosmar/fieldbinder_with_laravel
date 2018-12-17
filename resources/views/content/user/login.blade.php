@@ -5,23 +5,9 @@
 @endsection
 
 @section('content-view')
-    {!! Form::open(['route' => 'dashboard.login', 'method' => 'post', 'class' => 'default-form']) !!}
+    {!! Form::open(['route' => 'dashboard.login', 'method' => 'post']) !!}
         @include('templates.form.input', ['input' => 'email', 'attributes' => ['placeholder' => 'email']])
         @include('templates.form.password', ['input' => 'password', 'attributes' => ['placeholder' => 'password']])
         @include('templates.form.submit', ['input' => 'submit', 'class' => 'default-button'])
     {!! Form::close() !!}
-
-    @if(isset($error))
-        <div class="container">
-            {{ $error }}
-        </div>
-    @endif
-
-    @if(isset($messages[0]))
-        @foreach($messages as $message)
-            <div>
-                {{ $message }}
-            </div>
-        @endforeach
-    @endif
 @endsection

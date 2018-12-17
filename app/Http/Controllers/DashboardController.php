@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\DashboardService;
+use Prettus\Validator\Contracts\ValidatorInterface;
+use App\Repositories\UserRepository;
+use App\Validators\UserValidator;
+use Auth;
+use Exception;
 
 class DashboardController extends Controller
 {
-    private $service;
+    private $repository;
+    private $validator;
 
     public function __construct(DashboardService $service)
     {
@@ -15,20 +20,60 @@ class DashboardController extends Controller
     }
 
     public function index()
-    {        
-        return redirect()->route('home'); 
+    {
+        return redirect()->route('home');
     }
 
     public function auth(Request $request)
     {
-        $request = $this->service->auth($request->all());
-        $user = $request['success'] ? $request['data'] : null;
 
-        session()->flash('success', [
-            'success'   =>  $request['sucess'],
-            'message'   =>  $request['message'],
-        ]);
-        
-        return $request['success'] ? redirect()->route('user.dashboard') : redirect()->route('user.login');
+        try
+        {
+            if(env('PASSWORD_HASH'))
+            {
+                Auth::attempt($data, false);
+                return redirect()->route('user.dashboard');
+
+            }
+            $user = $this->repository->findWhere($request->all)->first();
+
+            if($user->email !== $data['email'])
+                array_push($messages, 'Invalid email');
+            if($user->password !== $data['password'])
+                array_push($messages, 'Invalid password');
+
+            if(isset($messages))
+            {
+                session()->flash('success', [
+                    'success' => false,
+                    'message' => $messsages
+                ]);
+
+                return redirect()->route('user.login');
+            }
+
+            session()->flash('success', [
+                'success'   =>  true,
+                'username'  =>  $user->nickname ?? $user->name
+            ]);
+
+            return redirect()->route('user.dashboard');
+        }
+        catch(Exception $e)
+        {
+            //for implement
+            /*
+            return redirect()->route('user.login)
+            */
+
+            //provisor
+            switch(get_class($e))
+            {
+                case QueryException::class      : return ['success' => false, 'messages' => $e->getMessage()];
+                case ValidatorException::class  : return ['success' => false, 'messages' => $e->getMessageBag()];
+                case Exception::class           : return ['success' => false, 'messages' => $e->getMessage()];
+                default                         : return ['success' => false, 'messages' => get_class($e)];
+            }
+        }
     }
 }
