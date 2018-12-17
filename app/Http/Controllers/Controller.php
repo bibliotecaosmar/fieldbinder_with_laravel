@@ -47,10 +47,12 @@ class Controller extends BaseController
      * Catalog of Spiecies
      * =======================================================x
      */
-    public function catalog()
+    public function catalog($niche, $page)
     {
         return view('content.catalog.catalog', [
-            'title' =>  'Catalog - Fieldbinder'
+            'title' =>  'Catalog - Fieldbinder',
+            'niche' =>  $niche,
+            'page'  =>  $page
         ]);
     }
 

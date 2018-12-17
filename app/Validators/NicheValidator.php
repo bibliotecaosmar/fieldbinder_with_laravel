@@ -18,8 +18,9 @@ class NicheValidator extends LaravelValidator
      * @var array
      */
     protected $rules = [
-        ValidatorInterface::RULE_MODEL  => [
+        ValidatorInterface::RULE_CREATE => [
             'niche' =>  'exists:spiecie,niche'
-        ]
+        ],
+        ValidatorInterface::RULE_UPDATE => [],
     ];
 }

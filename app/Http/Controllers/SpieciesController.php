@@ -27,15 +27,20 @@ class SpieciesController extends Controller
 
     public function indexer($niche, $page = 1)
     {
-        $model = $service->indexer($niche, $page);
+        $model = $this->service->indexer($niche, $page);
+        $catalog = $model['success'] ? $model['catalog'] : null;
 
         session()->flash('catalog', [
-            'niche'     =>  $model['niche'],
-            'page'      =>  $model['page'],
-            'catalog'   =>  $model['catalog']
+            'success'   =>  $model['success'],
+            'niche'     =>  $catalog['niche'],
+            'page'      =>  $catalog['page'],
+            'catalog'   =>  $catalog['catalog']
         ]);
 
-        return redirect()->route('catalog.spiecies', $model['niche'], $model['page']);
+        return redirect()->route('catalog.spiecies', [
+            'niche'     =>  $niche,
+            'page'      =>  $page
+        ]);
     }
 
     /**
