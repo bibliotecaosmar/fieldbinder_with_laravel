@@ -64,4 +64,27 @@
                 ];
             }
         }
+
+        public function destroy($id, $password)
+        {
+            try
+            {
+                //password = database_password ? continue : fail;
+                $this->repository->delete($id)
+
+                $email = $this->repository->findWhere('id' = $id, 'email');
+
+                return [
+                    'success'   => true,
+                    'message'    => 'User ' . $email . ' deleted'
+                ];
+            }
+            catch (\Exception $e)
+            {
+                return [
+                    'success'   => false,
+                    'message'   => 'Require failed'
+                ];
+            }
+        }
     }

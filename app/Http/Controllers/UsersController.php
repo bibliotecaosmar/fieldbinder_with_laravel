@@ -69,26 +69,15 @@ class UsersController extends Controller
         return redirect()->route('user.profile');
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($id, $password)
     {
-        $deleted = $this->repository->delete($id);
+        $deleted    = $this->service->delete($id, $password);
 
-        if (request()->wantsJson()) {
+        session()->flash([
+            'success'       => $deleted['success'],
+            'message'       => $deleted['message']
+        ]);
 
-            return response()->json([
-                'message' => 'User deleted.',
-                'deleted' => $deleted,
-            ]);
-        }
-
-        return redirect()->back()->with('message', 'User deleted.');
+        return redirect()->route('home');
     }
 }
