@@ -27,7 +27,7 @@ class UserValidator extends LaravelValidator
         ],
         ValidatorInterface::RULE_UPDATE => [
             'nickname' => 'required_without:users,name',
-            'name'     => 'required_without:users,nickname'
+            'name'     => 'required_without:users,nickname',
         ],
     ];
 }

@@ -2,6 +2,7 @@
     namespace App\Services;
 
     use Prettus\Validator\Contracts\ValidatorInterface;
+    use Prettus\Validator\Exceptions\ValidatorException;
     use App\Repositories\UserRepository;
     use App\Validators\UserValidator;
     use Exception;
@@ -19,8 +20,8 @@
 
         public function store(array $data)
         {
-            try{
-
+            try
+            {
                 $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
                 $user = $this->repository->create($data);
 
@@ -29,14 +30,38 @@
                     'message' => "User registered",
                     'data'    => $user
                 ];
-
-            }catch(\Exception $e){
-
+            }
+            catch(Exception $e)
+            {
                 return [
                     'success' => false,
-                    'message' => 'require failed'
+                    'message' => 'Require failed'
                 ];
-                
+            }
+        }
+
+        public function show($data, $id)
+        {
+            try
+            {
+                $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+                //password = database_password ? continue : fail;
+
+                $data = $this->repository->update($data, $id);
+
+                return [
+                    'success'   =>  true,
+                    'message'   =>  'User updated',
+                    'data'      =>  $data
+                ];
+            }
+            catch (Exception $e)
+            {
+                return [
+                    'success'   =>  false,
+                    'messsage'  =>  'Require failed'
+                ];
             }
         }
     }
