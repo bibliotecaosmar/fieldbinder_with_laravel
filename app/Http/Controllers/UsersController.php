@@ -18,11 +18,6 @@ class UsersController extends Controller
         $this->service  = $service;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($id)
     {
         return redirect()->route('user.show', $id);
@@ -42,9 +37,9 @@ class UsersController extends Controller
         return redirect()->route('dashboard.auth');
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $profile    = $this->service->show($id);
+        $profile    = $this->service->show($request->all(), $id);
         $user       = $profile['success'] ? $profile['data'] ? null;
 
         session()->flash('profile', [
@@ -53,6 +48,19 @@ class UsersController extends Controller
         ])
 
         return redirect()->route('user.profile');
+    }
+
+    public function edit(Request $request)
+    {
+        $edit = $this->service->edit($request->all());
+        $panel = $edit['success'] ? $edit['data'] : null;
+
+        session()->flash('panel', [
+            'success'   =>  $edit['success'],
+            'panel'     =>  $panel
+        ])
+
+        return redirect()->route('catalog.manager');
     }
 
     public function update(UserUpdateRequest $request, $id)
@@ -71,7 +79,7 @@ class UsersController extends Controller
 
     public function destroy($id, $password)
     {
-        $deleted    = $this->service->delete($id, $password);
+        $deleted = $this->service->delete($id, $password);
 
         session()->flash([
             'success'       => $deleted['success'],

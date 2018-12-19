@@ -5,6 +5,7 @@
     use Prettus\Validator\Exceptions\ValidatorException;
     use App\Repositories\UserRepository;
     use App\Validators\UserValidator;
+    use App\Services\DashboardService;
     use Exception;
 
     class UserService
@@ -40,20 +41,24 @@
             }
         }
 
-        public function show($data, $id)
+        public function show($data, $id, DashboardService $dashboard)
         {
             try
             {
-                $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+                if($dashboard->auth($data)['success'])
+                {
+                    $profile = $this->repository->find($id);
 
-                //password = database_password ? continue : fail;
-
-                $data = $this->repository->update($data, $id);
+                    return [
+                        'success'   =>  true,
+                        'message'   =>  'User updated',
+                        'data'      =>  $profile
+                    ];
+                }
 
                 return [
-                    'success'   =>  true,
-                    'message'   =>  'User updated',
-                    'data'      =>  $data
+                    'success'   =>  false,
+                    'messsage'  =>  'Action not avoid'
                 ];
             }
             catch (Exception $e)
@@ -65,21 +70,79 @@
             }
         }
 
+        public function edit($data, DashboardService $dashboard)
+        {
+            try
+            {
+                if($dashboard->auth($data)['success'])
+                {
+                    $users = $this->repository->findAll();
+
+                    return [
+                        'success'   => true,
+                        'data'      => $users
+                    ];
+                }
+
+                return [
+                    'success'   => false,
+                    'message'   => 'Action not avoid'
+                ];
+            }
+            catch (Exception $e)
+            {
+                return [
+                    'success'   => false,
+                    'message'   => 'Require failed'
+                ];
+            }
+        }
+
+        public function update($data)
+        {
+            try
+            {
+                $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+                $this->repository->update($data);
+
+                return [
+                    'success'   =>  true,
+                    'message'   =>  'Success at update',
+                ];
+            }
+            catch (Exception $e)
+            {
+                return [
+                    'success'   =>  false,
+                    'message'   =>  'Error at update'
+                ];
+            }
+
+        }
+
         public function destroy($id, $password)
         {
             try
             {
-                //password = database_password ? continue : fail;
-                $this->repository->delete($id)
+                if($dashboard->auth($data)['success'])
+                {
+                    $this->repository->delete($id)
 
-                $email = $this->repository->findWhere('id' = $id, 'email');
+                    $email = $this->repository->findWhere('id' = $id, 'email');
+
+                    return [
+                        'success'   => true,
+                        'message'    => 'User ' . $email . ' deleted'
+                    ];
+                }
 
                 return [
-                    'success'   => true,
-                    'message'    => 'User ' . $email . ' deleted'
+                    'success'   => false,
+                    'message'   => 'Action not avoid'
                 ];
             }
-            catch (\Exception $e)
+            catch (Exception $e)
             {
                 return [
                     'success'   => false,

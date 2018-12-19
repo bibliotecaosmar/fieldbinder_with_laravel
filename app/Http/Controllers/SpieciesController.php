@@ -43,15 +43,6 @@ class SpieciesController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  SpiecieCreateRequest $request
-     *
-     * @return \Illuminate\Http\Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     */
     public function store(SpiecieCreateRequest $request)
     {
         $request = $this->service->store($request->all());
@@ -65,13 +56,6 @@ class SpieciesController extends Controller
         return redirect()->route('user.dashboard', ['auth'  =>  $credentials]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $spiecie = $this->repository->find($id);
@@ -86,13 +70,6 @@ class SpieciesController extends Controller
         return view('spiecies.show', compact('spiecie'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $spiecie = $this->repository->find($id);
@@ -100,16 +77,6 @@ class SpieciesController extends Controller
         return view('spiecies.edit', compact('spiecie'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  SpiecieUpdateRequest $request
-     * @param  string            $id
-     *
-     * @return Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     */
     public function update(SpiecieUpdateRequest $request, $id)
     {
         try {
@@ -142,15 +109,7 @@ class SpieciesController extends Controller
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         $deleted = $this->repository->delete($id);

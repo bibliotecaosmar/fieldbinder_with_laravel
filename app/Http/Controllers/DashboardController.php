@@ -26,47 +26,15 @@ class DashboardController extends Controller
 
     public function auth(Request $request)
     {
+        $auth       = $this->service->auth($request->all());
+        $username   = $auth['success'] ? $auth['data'] : null;
 
-        try
-        {
-            if(env('PASSWORD_HASH'))
-            {
-                Auth::attempt($data, false);
-                return redirect()->route('user.dashboard');
+        session()->flash('auth', [
+            'success'   => $auth['success'],
+            'message'   => $auth['message'],
+            'username'  => $username
+        ]);
 
-            }
-            $user = $this->repository->findWhere($request->all)->first();
-
-            if($user->email !== $data['email'])
-                array_push($messages, 'Invalid email');
-            if($user->password !== $data['password'])
-                array_push($messages, 'Invalid password');
-
-            if(isset($messages))
-            {
-                session()->flash('success', [
-                    'success' => false,
-                    'message' => $messsages
-                ]);
-
-                return redirect()->route('user.login');
-            }
-
-            session()->flash('success', [
-                'success'   =>  true,
-                'username'  =>  $user->nickname ?? $user->name
-            ]);
-
-            return redirect()->route('user.dashboard');
-        }
-        catch(Exception $e)
-        {
-            session()->flash([
-                'success'   => false,
-                'messages'  => $e->getMessageBag()
-            ]);
-
-            return redirect()->route('user.login);
-        }
+        return $auth['success'] ? redirect()->route('user.dashboard') : redirect()->route('user.login');
     }
 }
