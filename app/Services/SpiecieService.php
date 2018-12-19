@@ -5,20 +5,17 @@
     use App\Repositories\RecordRepository;
     use App\Repositories\SpiecieRepository;
     use App\Validators\SpiecieValidator;
-    use App\Validators\NicheValidator;
     use Exception;
 
     class SpiecieService
     {
-        private $repository_spiecie;
-        private $validator_spiecie;
-        private $validator_niche;
+        private $repository;
+        private $validator;
 
-        public function __construct(SpiecieRepository $repository_spiecie, SpiecieValidator $validator_spiecie, NicheValidator $validator_niche)
+        public function __construct(SpiecieRepository $repository, SpiecieValidator $validator)
         {
-            $this->repository_spiecie   = $repository_spiecie;
-            $this->validator_spiecie    = $validator_spiecie;
-            $this->validator_niche      = $validator_niche;
+            $this->repository   = $repository;
+            $this->validator    = $validator;
         }
 
         public function indexer($niche, $page)
@@ -27,7 +24,7 @@
             dd($niche);
             try
             {
-                $model = $this->repository_spiecie->findWhere([
+                $model = $this->repository->findWhere([
                                                         'niche' => [1, 2, 3, 4]
                                                     ], $niche)
                                                   ->orderBy('id', 'DESC')
@@ -57,6 +54,7 @@
         public function store(array $data)
         {
             try{
+
                 $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
                 $user = $this->repository->create($data);
 
@@ -65,27 +63,14 @@
                     'message' => "User registered",
                     'data'    => $user
                 ];
-            }catch(\Exception $e){
-                switch(get_class($e))
-                {
-                    case QueryException::class      : return ['success' => false, 'messages' => $e->getMessage()];
-                    case ValidatorException::class  : return ['success' => false, 'messages' => $e->getMessageBag()];
-                    case Exception::class           : return ['success' => false, 'messages' => $e->getMessage()];
-                    default                         : return ['success' => false, 'messages' => get_class($e)];
-                }
+
+            }catch(Exception $e){
+
                 return [
                     'success' => false,
                     'message' => 'require failed'
                 ];
+
             }
-        }
-
-        public function update()
-        {
-
-        }
-        public function delete()
-        {
-
         }
     }

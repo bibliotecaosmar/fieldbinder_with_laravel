@@ -27,13 +27,13 @@ class CreateRecordsTable extends Migration
 			$table->string('common_name', 55)->nullable();
 			$table->string('pic_id', 255)->nullable();
 
-			$table->foreign('user_id')->references('id')->on('users');
-			$table->foreign('spiecie_id')->references('id')->on('spiecies');
-			$table->foreign('niche_id')->references('id')->on('niches');
-
 			$table->rememberToken();
 			$table->timestamps();
 			$table->softDeletes();
+
+			$table->foreign('user_id')->references('id')->on('users');
+			$table->foreign('spiecie_id')->references('id')->on('spiecies');
+			$table->foreign('niche_id')->references('id')->on('niches');
 		});
 	}
 
@@ -44,7 +44,7 @@ class CreateRecordsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::table('records', function (Blueprint $table){
+		Schema::table('records', function (Blueprint $table) {
 			$table->dropForeign('records_user_id_foreign');
 			$table->dropForeign('records_spiecie_id_foreign');
 			$table->dropForeign('records_niche_id_foreign');

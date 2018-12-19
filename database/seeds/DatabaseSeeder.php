@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
 
         Spiecie::create([
             'spiecie'       => 'Felis Catus',
-            'niche'         => 'animal',
+            'niche'         => 2,
             'habitat'       => 'anywhere',
             'common_name'   => 'cat',
             'pic_id'        => bcrypt('spiecie_pic/cat001.jpg'),

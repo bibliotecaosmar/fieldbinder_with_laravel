@@ -20,32 +20,23 @@
         public function store(array $data)
         {
             try{
+
                 $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
                 $user = $this->repository->create($data);
+
                 return [
                     'success' => true,
                     'message' => "User registered",
                     'data'    => $user
                 ];
+
             }catch(\Exception $e){
+
                 return [
                     'success' => false,
                     'message' => 'require failed'
                 ];
+                
             }
-        }
-
-        public function show()
-        {
-            
-        }
-
-        public function update()
-        {
-
-        }
-        public function delete()
-        {
-
         }
     }

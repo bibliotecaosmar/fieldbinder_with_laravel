@@ -29,13 +29,13 @@ class CreateUsersTable extends Migration
 			$table->string('email', 50)->unique();
 			$table->string('password', 255);
 
-			//
-			$table->string('status', 9)->default('active');
-			$table->string('permission', 10)->default('app.common');
-
 			$table->rememberToken();
 			$table->timestamps();
 			$table->softDeletes();
+
+			//
+			$table->string('status', 9)->default('active');
+			$table->string('permission', 10)->default('app.common');
 		});
 	}
 

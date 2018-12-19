@@ -20,17 +20,15 @@ class CreateSpieciesTable extends Migration
 
 			//data about spiecie
 			$table->string('spiecie', 55);
-			$table->unsignedInteger('niche_id');
+			$table->unsignedInteger('niche_id')->nullable();
 			$table->string('habitat', 55);
 			$table->string('common_name', 55);
 			$table->string('pic_id', 255);
-
-			$table->foreign('niche_id')->references('id')->on('niches');
-
-			//stranger key ??
 			$table->string('authors');
 
-            $table->timestamps();
+			$table->timestamps();
+
+			$table->foreign('niche_id')->references('id')->on('niches');
 		});
 	}
 
@@ -41,7 +39,7 @@ class CreateSpieciesTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::table('records', function (Blueprint $table){
+		Schema::table('spiecies', function (Blueprint $table) {
 			$table->dropForeign('spiecies_niche_id_foreign');
 		});
 

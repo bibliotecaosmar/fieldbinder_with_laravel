@@ -19,13 +19,11 @@
             </thead>
             <tbody>
                 <tr>
-                    <!--
-                    <tb>{{ $ }}</tb>
-                    <tb>{{ $ }}</tb>
-                    <tb>{{ $ }}</tb>
-                    <tb>{{ $ }}</tb>
-                    <tb>{{ $ }}</tb>
-                    -->
+                    <tb>{{ $spiecie->spiecie ?? null }}</tb>
+                    <tb>{{ $spiecie->niche_id ?? null }}</tb>
+                    <tb>{{ $spiecie->habitat ?? null }}</tb>
+                    <tb>{{ $spiecie->common_name ?? null }}</tb>
+                    <tb>{{ $spiecie->authors ?? null }}</tb>
                 </tr>
             </tbody>
         </table>

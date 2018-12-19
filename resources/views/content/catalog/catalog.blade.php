@@ -2,11 +2,11 @@
 
 @section('content-view')
 
-    @if(session('catalog')['success'])
-
+    @forelse(session('catalog')['success'])
+        //
 
     @else
         <span>None spiecie found.</span>
-    @endif
+    @endforelse
 
 @endsection

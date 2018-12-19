@@ -61,19 +61,12 @@ class DashboardController extends Controller
         }
         catch(Exception $e)
         {
-            //for implement
-            /*
-            return redirect()->route('user.login)
-            */
+            session()->flash([
+                'success'   => false,
+                'messages'  => $e->getMessageBag()
+            ]);
 
-            //provisor
-            switch(get_class($e))
-            {
-                case QueryException::class      : return ['success' => false, 'messages' => $e->getMessage()];
-                case ValidatorException::class  : return ['success' => false, 'messages' => $e->getMessageBag()];
-                case Exception::class           : return ['success' => false, 'messages' => $e->getMessage()];
-                default                         : return ['success' => false, 'messages' => get_class($e)];
-            }
+            return redirect()->route('user.login);
         }
     }
 }
