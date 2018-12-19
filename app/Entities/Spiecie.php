@@ -34,6 +34,6 @@ class Spiecie extends Model implements Transformable
 
     public function niches()
     {
-        return $this->belongTo(Spiecie::class);
+        return $this->belongTo(Niche::class);
     }
 }

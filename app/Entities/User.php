@@ -32,6 +32,11 @@ class User extends Authenticatable
         'password', 'pic', 'diploma', 'status', 'rememberToken'
     ];
 
+    public function records()
+    {
+        return $this->hasMany(Record::class);
+    }
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = env('PASSWORD_HASH') ? bcrypt($value) : $value;

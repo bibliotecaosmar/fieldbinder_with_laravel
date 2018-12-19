@@ -24,14 +24,21 @@
         public function indexer($niche, $page)
         {
             $niche = ['niche' => $niche];
-
+            dd($niche);
             try
             {
-                $this->validator_niche->with($niche)->passesOrFail(ValidatorInterface::RULE_CREATE);
-                $model = $this->repository_spiecie->orderBy('id', 'desc')->skip(($page-1)*9)->take(9)->get();
+                $model = $this->repository_spiecie->findWhere([
+                                                        'niche' => [1, 2, 3, 4]
+                                                    ], $niche)
+                                                  ->orderBy('id', 'DESC')
+                                                  ->skip(($page-1)*9)
+                                                  ->take(9)
+                                                  ->get();
+
+                                                  dd($model);
 
                 $catalog = [
-                    'niche'     =>  $niche,
+                    'niche'     =>  $niche['niche'],
                     'page'      =>  $page,
                     'catalog'   =>  $model
                 ];

@@ -19,15 +19,15 @@ class UserValidator extends LaravelValidator
      */
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'nickname' => 'unique:user,nickname'|'required_without:user,name',
+            'nickname' => 'unique:users,nickname'|'required_without:users,name',
             'birth'    => 'required',
-            'name'     => 'unique:user,name'|'required_without:user,nickname',
-            'email'    => 'required|unique:user,email',
+            'name'     => 'unique:users,name'|'required_without:users,nickname',
+            'email'    => 'required|unique:users,email',
             'password' => 'required'
         ],
         ValidatorInterface::RULE_UPDATE => [
-            'nickname' => 'required_without:user,name',
-            'name'     => 'required_without:user,nickname'
+            'nickname' => 'required_without:users,name',
+            'name'     => 'required_without:users,nickname'
         ],
     ];
 }

@@ -19,7 +19,8 @@ class SpiecieValidator extends LaravelValidator
      */
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'pic_id' => 'required'
+            'pic_id'    => 'required',
+            'niche_id'  => 'exists:niches,id'
         ],
         ValidatorInterface::RULE_UPDATE => []
     ];

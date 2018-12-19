@@ -44,10 +44,10 @@ class CreateRecordsTable extends Migration
 	 */
 	public function down()
 	{
-		Schemar::table('records', function (Blueprint $table){
-			$table->dropForeign('niches_user_id_foreign');
-			$table->dropForeign('niches_spiecie_id_foreign');
-			$table->dropForeign('niches_niche_id_foreign');
+		Schema::table('records', function (Blueprint $table){
+			$table->dropForeign('records_user_id_foreign');
+			$table->dropForeign('records_spiecie_id_foreign');
+			$table->dropForeign('records_niche_id_foreign');
 		});
 
 		Schema::drop('records');
