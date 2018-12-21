@@ -29,12 +29,21 @@ class DashboardController extends Controller
         $auth       = $this->service->auth($request->all());
         $username   = $auth['success'] ? $auth['data'] : null;
 
-        session()->flash('auth', [
+        session('auth', [
+            'id'        => $username['id'],
+            'username'  => $username['username']
+        ]);
+
+        session()->flash('success', [
             'success'   => $auth['success'],
             'message'   => $auth['message'],
-            'username'  => $username
         ]);
 
         return $auth['success'] ? redirect()->route('user.dashboard') : redirect()->route('user.login');
+    }
+
+    public function logoff()
+    {
+        
     }
 }

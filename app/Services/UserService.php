@@ -5,7 +5,6 @@
     use Prettus\Validator\Exceptions\ValidatorException;
     use App\Repositories\UserRepository;
     use App\Validators\UserValidator;
-    use App\Services\DashboardService;
     use Exception;
 
     class UserService
@@ -41,24 +40,15 @@
             }
         }
 
-        public function show($data, $id, DashboardService $dashboard)
+        public function show($id)
         {
             try
             {
-                if($dashboard->auth($data)['success'])
-                {
-                    $profile = $this->repository->find($id);
-
-                    return [
-                        'success'   =>  true,
-                        'message'   =>  'User updated',
-                        'data'      =>  $profile
-                    ];
-                }
+                $profile = $this->repository->find($id);
 
                 return [
-                    'success'   =>  false,
-                    'messsage'  =>  'Action not avoid'
+                    'success'   =>  true,
+                    'data'      =>  $profile
                 ];
             }
             catch (Exception $e)
@@ -70,23 +60,15 @@
             }
         }
 
-        public function edit($data, DashboardService $dashboard)
+        public function edit($id)
         {
             try
             {
-                if($dashboard->auth($data)['success'])
-                {
-                    $users = $this->repository->findAll();
-
-                    return [
-                        'success'   => true,
-                        'data'      => $users
-                    ];
-                }
+                $users = $this->repository->findAll();
 
                 return [
-                    'success'   => false,
-                    'message'   => 'Action not avoid'
+                    'success'   => true,
+                    'data'      => $users
                 ];
             }
             catch (Exception $e)
@@ -118,28 +100,19 @@
                     'message'   =>  'Error at update'
                 ];
             }
-
         }
 
-        public function destroy($id, $password)
+        public function destroy($id)
         {
             try
             {
-                if($dashboard->auth($data)['success'])
-                {
-                    $this->repository->delete($id)
+                $this->repository->delete($id)
 
-                    $email = $this->repository->findWhere('id' = $id, 'email');
-
-                    return [
-                        'success'   => true,
-                        'message'    => 'User ' . $email . ' deleted'
-                    ];
-                }
+                $email = $this->repository->findWhere('id' = $id, 'email');
 
                 return [
-                    'success'   => false,
-                    'message'   => 'Action not avoid'
+                    'success'   => true,
+                    'message'    => 'User ' . $email . ' deleted'
                 ];
             }
             catch (Exception $e)

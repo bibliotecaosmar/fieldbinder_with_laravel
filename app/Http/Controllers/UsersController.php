@@ -18,7 +18,7 @@ class UsersController extends Controller
         $this->service  = $service;
     }
 
-    public function index($id)
+    public function index()
     {
         return redirect()->route('user.show', $id);
     }
@@ -37,55 +37,94 @@ class UsersController extends Controller
         return redirect()->route('dashboard.auth');
     }
 
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $profile    = $this->service->show($request->all(), $id);
-        $user       = $profile['success'] ? $profile['data'] ? null;
+        if(session('auth')['success'])
+        {
+            $profile    = $this->service->show($id);
+            $user       = $profile['success'] ? $profile['data'] ? null;
 
-        session()->flash('profile', [
-            'success'   =>  $profile['success'],
-            'user'      =>  $user
-        ])
+            session()->flash('profile', [
+                'user'      =>  $user
+            ]);
 
-        return redirect()->route('user.profile');
+            return $profile['success'] ? redirect()->route('user.profile') : redirect()->route('not.found');
+        }
+
+        session()->flash([
+            'success'   =>  false,
+            'messsage'  =>  'Action not avoid'
+        ]);
+
+        return redirect()->route('not.found');
     }
 
-    public function edit(Request $request)
+    public function edit($id)
     {
-        $edit = $this->service->edit($request->all());
-        $panel = $edit['success'] ? $edit['data'] : null;
+        if(session('auth')['success'])
+        {
+            $edit = $this->service->edit($request->all());
+            $panel = $edit['success'] ? $edit['data'] : null;
 
-        session()->flash('panel', [
-            'success'   =>  $edit['success'],
-            'panel'     =>  $panel
-        ])
+            session()->flash('panel', [
+                'success'   =>  $edit['success'],
+                'panel'     =>  $panel
+            ])
 
-        return redirect()->route('catalog.manager');
+            return redirect()->route('catalog.manager');
+        }
+
+        session()->flash([
+            'success'   =>  false,
+            'messsage'  =>  'Action not avoid'
+        ]);
+
+        return redirect()->route('not.found');
     }
 
     public function update(UserUpdateRequest $request, $id)
     {
-        $update = $service->show($request, $id);
-        $user   = $update['success'] ? $update['data'] : null;
+        if($this->service_dashboard->auth())
+        {
+            $update = $this->service->show($request, $id);
+            $user   = $update['success'] ? $update['data'] : null;
+
+            session()->flash([
+                'success'   => true,
+                'message'   => $update['message'],
+                'user'      => $user
+            ]);
+
+            return redirect()->route('user.profile');
+        }
 
         session()->flash([
-            'success'   => true,
-            'message'   => $update['message'],
-            'user'      => $user
+            'success'   =>  false,
+            'messsage'  =>  'Action not avoid'
         ]);
 
-        return redirect()->route('user.profile');
+        return redirect()->route('not.found');
     }
 
-    public function destroy($id, $password)
+    public function destroy($id)
     {
-        $deleted = $this->service->delete($id, $password);
+        if($this->service_dashboard->auth())
+        {
+            $deleted = $this->service->destroy($id, $password);
 
+            session()->flash([
+                'success'       => $deleted['success'],
+                'message'       => $deleted['message']
+            ]);
+
+            return redirect()->route('home');
+        }
+        
         session()->flash([
-            'success'       => $deleted['success'],
-            'message'       => $deleted['message']
+            'success'   =>  false,
+            'messsage'  =>  'Action not avoid'
         ]);
 
-        return redirect()->route('home');
+        return redirect()->route('not.found');
     }
 }

@@ -20,8 +20,6 @@
 
         public function indexer($niche, $page)
         {
-            $niche = ['niche' => $niche];
-            dd($niche);
             try
             {
                 $model = $this->repository->findWhere([
@@ -31,8 +29,6 @@
                                                   ->skip(($page-1)*9)
                                                   ->take(9)
                                                   ->get();
-
-                                                  dd($model);
 
                 $catalog = [
                     'niche'     =>  $niche['niche'],
@@ -53,8 +49,8 @@
 
         public function store(array $data)
         {
-            try{
-
+            try
+            {
                 $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
                 $user = $this->repository->create($data);
 
@@ -63,14 +59,13 @@
                     'message' => "User registered",
                     'data'    => $user
                 ];
-
-            }catch(Exception $e){
-
+            }
+            catch(Exception $e)
+            {
                 return [
                     'success' => false,
                     'message' => 'require failed'
                 ];
-
             }
         }
     }
