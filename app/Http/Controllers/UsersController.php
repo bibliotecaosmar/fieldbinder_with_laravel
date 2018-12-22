@@ -11,11 +11,13 @@ use App\Services\UserService;
 
 class UsersController extends Controller
 {
-    protected $service;
+    protected $service_user;
+    protected $service_dashboard;
 
-    public function __construct(UserService $service)
+    public function __construct(UserService $service_user, DashboardService $service_dashboard)
     {
-        $this->service  = $service;
+        $this->service_user         = $service_user;
+        $this->service_dashboard    = $service_dashboard;
     }
 
     public function index()
@@ -25,7 +27,7 @@ class UsersController extends Controller
 
     public function store(UserCreateRequest $request)
     {
-        $request    = $this->service->store($request->all());
+        $request    = $this->service_user->store($request->all());
         $user       = $request['success'] ? $request['data'] : null;
 
         session()->flash('success', [
@@ -41,7 +43,7 @@ class UsersController extends Controller
     {
         if(session('auth')['success'])
         {
-            $profile    = $this->service->show($id);
+            $profile    = $this->service_user->show($id);
             $user       = $profile['success'] ? $profile['data'] ? null;
 
             session()->flash('profile', [
@@ -63,7 +65,7 @@ class UsersController extends Controller
     {
         if(session('auth')['success'])
         {
-            $edit = $this->service->edit($request->all());
+            $edit = $this->service_user->edit($request->all());
             $panel = $edit['success'] ? $edit['data'] : null;
 
             session()->flash('panel', [
@@ -84,9 +86,9 @@ class UsersController extends Controller
 
     public function update(UserUpdateRequest $request, $id)
     {
-        if($this->service_dashboard->auth())
+        if($this->service_dashboard->auth()['success'])
         {
-            $update = $this->service->show($request, $id);
+            $update = $this->service_user->show($request, $id);
             $user   = $update['success'] ? $update['data'] : null;
 
             session()->flash([
@@ -108,9 +110,9 @@ class UsersController extends Controller
 
     public function destroy($id)
     {
-        if($this->service_dashboard->auth())
+        if($this->service_dashboard->auth()['success'])
         {
-            $deleted = $this->service->destroy($id, $password);
+            $deleted = $this->service_user->destroy($id, $password);
 
             session()->flash([
                 'success'       => $deleted['success'],
@@ -119,7 +121,7 @@ class UsersController extends Controller
 
             return redirect()->route('home');
         }
-        
+
         session()->flash([
             'success'   =>  false,
             'messsage'  =>  'Action not avoid'

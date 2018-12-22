@@ -18,20 +18,18 @@
             $this->validator    = $validator;
         }
 
-        public function indexer($niche, $page)
+        public function indexer($id, $page)
         {
             try
             {
-                $model = $this->repository->findWhere([
-                                                        'niche' => [1, 2, 3, 4]
-                                                    ], $niche)
-                                                  ->orderBy('id', 'DESC')
-                                                  ->skip(($page-1)*9)
-                                                  ->take(9)
-                                                  ->get();
-
+                $niche = $this->repository->all()/*
+                                          ->orderBy('id', 'DESC')
+                                          ->skip(($page-1)*9)
+                                          ->take(9)
+                                          ->get()*/;
+                                          dd($niche);
                 $catalog = [
-                    'niche'     =>  $niche['niche'],
+                    'niche'     =>  $niche,
                     'page'      =>  $page,
                     'catalog'   =>  $model
                 ];

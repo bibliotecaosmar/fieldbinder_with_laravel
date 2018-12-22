@@ -25,9 +25,9 @@ class SpieciesController extends Controller
         return redirect()->route('catalog.spiecies');
     }
 
-    public function indexer($niche, $page = 1)
+    public function indexer($id, $page = 1)
     {
-        $model = $this->service->indexer($niche, $page);
+        $model = $this->service->indexer($id, $page);
         $catalog = $model['success'] ? $model['catalog'] : null;
 
         session()->flash('catalog', [
@@ -109,7 +109,7 @@ class SpieciesController extends Controller
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
-    
+
     public function destroy($id)
     {
         $deleted = $this->repository->delete($id);

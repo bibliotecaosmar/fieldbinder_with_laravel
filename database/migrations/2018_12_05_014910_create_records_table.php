@@ -22,7 +22,7 @@ class CreateRecordsTable extends Migration
 			$table->unsignedInteger('spiecie_id')->nullable();
 
 			$table->string('spiecie', 55)->nullable();
-			$table->unsignedInteger('niche_id')->nullable();
+			$table->unsignedInteger('niche_id');
 			$table->string('habitat', 55)->nullable();
 			$table->string('common_name', 55)->nullable();
 			$table->string('pic_id', 255)->nullable();

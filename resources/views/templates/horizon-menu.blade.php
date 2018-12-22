@@ -2,22 +2,14 @@
     <a class="nav-link" href="{{ route('home') }}">home</a>
 </li>
 <li class="nav-item active">
-    <a class="nav-link" href="{{ route('spiecie.indexer', ['niche' => [
-                                                                'niche' => 'plant'
-                                                        ]]) }}">plant</a>
+    <a class="nav-link" href="{{ route('spiecie.indexer', ['id' => 1]) }}">plant</a>
 </li>
 <li class="nav-item active">
-    <a class="nav-link" href="{{ route('spiecie.indexer', ['niche' => [
-                                                                'niche' => 'animal'
-                                                        ]]) }}">animal</a>
+    <a class="nav-link" href="{{ route('spiecie.indexer', ['id' => 2]) }}">animal</a>
 </li>
 <li class="nav-item active">
-    <a class="nav-link" href="{{ route('spiecie.indexer', ['niche' => [
-                                                                'niche' => 'insect'
-                                                        ]]) }}">insect</a>
+    <a class="nav-link" href="{{ route('spiecie.indexer', ['id' => 3]) }}">insect</a>
 </li>
 <li class="nav-item active">
-    <a class="nav-link" href="{{ route('spiecie.indexer', ['niche' => [
-                                                                'niche' => 'mushroom'
-                                                        ]]) }}">mushroom</a>
+    <a class="nav-link" href="{{ route('spiecie.indexer', ['id' => 4]) }}">mushroom</a>
 </li>
