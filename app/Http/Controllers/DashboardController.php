@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use App\Repositories\UserRepository;
-use App\Validators\UserValidator;
+use App\Services\DashboardService;
 use Auth;
 use Exception;
 
@@ -44,6 +43,6 @@ class DashboardController extends Controller
 
     public function logoff()
     {
-        
+
     }
 }

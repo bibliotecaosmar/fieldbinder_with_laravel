@@ -28,7 +28,10 @@
                 return [
                     'success' => true,
                     'message' => "User registered",
-                    'data'    => $user
+                    'data'    => [
+                        'username'      =>  $user['nickname'] ?? $user['name'],
+                        'id'            =>  $user['id']
+                    ]
                 ];
             }
             catch(Exception $e)

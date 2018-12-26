@@ -4,7 +4,7 @@
 @guest
 <ul class="navbar-nav mr-auto col-2">
     <li class="nav-item active">
-        <a class="nav-link" href="{{ route('dashboard.login') }}">Signin</a>
+        <a class="nav-link" href="{{ route('user.login') }}">Signin</a>
     </li>
     <li class="nav-item active">
         or

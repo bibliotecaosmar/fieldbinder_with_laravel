@@ -22,21 +22,20 @@
         {
             try
             {
-                $niche = $this->repository->all()/*
-                                          ->orderBy('id', 'DESC')
-                                          ->skip(($page-1)*9)
+                $model = $this->repository->orderBy('id', 'DESC')
+                                          ->skip(($page - 1) * 9)
                                           ->take(9)
-                                          ->get()*/;
-                                          dd($niche);
+                                          ->with(['niche_id' => $id]);
+
                 $catalog = [
-                    'niche'     =>  $niche,
+                    'niche'     =>  $model->niche_id->niche,
                     'page'      =>  $page,
                     'catalog'   =>  $model
                 ];
 
                 return [
                     'success'   =>  true,
-                    'catalog'   =>  $model
+                    'catalog'   =>  $catalog
                 ];
             }
             catch(Exception $e)

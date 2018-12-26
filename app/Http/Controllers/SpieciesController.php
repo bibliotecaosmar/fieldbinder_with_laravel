@@ -38,7 +38,7 @@ class SpieciesController extends Controller
         ]);
 
         return redirect()->route('catalog.spiecies', [
-            'niche'     =>  $niche,
+            'niche'     =>  $catalog['niche'],
             'page'      =>  $page
         ]);
     }

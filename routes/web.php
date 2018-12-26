@@ -67,7 +67,7 @@ Route::get('/{niche}&&{page?}', ['as' => 'spiecie.indexer', 'uses' => 'SpieciesC
  *  *Post routes*
  *
  */
-Route::post('/authenticating', ['as' => 'dashboard.login', 'uses' => 'DashboardController@auth']);
+Route::post('/authenticate', ['as' => 'dashboard.login', 'uses' => 'DashboardController@auth']);
 Route::post('/vote', ['as' => 'survey.vote', 'uses' => 'SurveyController@vote']);
 /*
 Route::get('/', function () {

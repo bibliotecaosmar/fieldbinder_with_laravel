@@ -2,12 +2,15 @@
 
 namespace App\Services;
 
+use App\Repositories\UserRepository;
+use App\Validators\UserValidator;
+
 class DashboardService
 {
     private $repository;
     private $validator;
 
-    public function __construct(DashboardService $service)
+    public function __construct(UserRepository $repository,UserValidator $validator)
     {
         $this->repository   = $repository;
         $this->validator    = $validator;

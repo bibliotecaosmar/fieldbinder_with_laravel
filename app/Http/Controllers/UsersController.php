@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Services\UserService;
+use App\Services\DashboardService;
 
 class UsersController extends Controller
 {
@@ -30,13 +31,18 @@ class UsersController extends Controller
         $request    = $this->service_user->store($request->all());
         $user       = $request['success'] ? $request['data'] : null;
 
+        $this->service_dashboard->auth([
+            'email'     =>  $request->all()['email'],
+            'password'  =>  $request->all()['password']
+        ])
+
         session()->flash('success', [
                             'success'   => $request['success'],
                             'message'   => $request['message'],
                             'user'      => $user
                             ]);
 
-        return redirect()->route('dashboard.auth');
+        return redirect()->route('documentaion.guide');
     }
 
     public function show($id)
