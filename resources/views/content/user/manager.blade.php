@@ -5,22 +5,29 @@
 @endsection
 
 @section('content-view')
-    <div class="container">
-        <div class="container-view">
-            <table class="default-table">
-                <thead>
-                    <tr>
-                        <td>#</td>
-                        <td>Nickname</td>
-                        <td>Birth</td>
-                        <td>Name</td>
-                        <td>Diploma</td>
-                        <td>Email</td>
-                        <td>Password</td>
-                        <td>Permission</td>
-                    </tr>
-                </thead>
-                @forelse($users as user)
+    @guest
+        <div>
+            <span>{{ session('message') }}</span>
+        </div>
+    @endguest
+
+    @auth('admin')
+        <div class="container">
+            <div class="container-view">
+                <table class="default-table">
+                    <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Nickname</td>
+                            <td>Birth</td>
+                            <td>Name</td>
+                            <td>Diploma</td>
+                            <td>Email</td>
+                            <td>Password</td>
+                            <td>Permission</td>
+                        </tr>
+                    </thead>
+                    @forelse($users as user)
                     <tbody>
                         <tr>
                             <td>{{ $user->id }}</td>
@@ -33,8 +40,9 @@
                     </tbody>
                     @empty
                     <h2>None Users</h2>
-                @endforelse
-            </table>
+                    @endforelse
+                </table>
+            </div>
         </div>
-    </div>
+    @endauth
 @endsection
