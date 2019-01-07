@@ -20,9 +20,8 @@ class Niche extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [
-        'niche_id', 'niche'
-    ];
+    protected $table    = 'niches';
+    protected $fillable = ['niche_id', 'niche'];
 
     public function spiecies()
     {

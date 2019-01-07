@@ -4,19 +4,20 @@ namespace App\Services;
 
 use App\Repositories\UserRepository;
 use App\Validators\UserValidator;
+use Auth;
 
 class DashboardService
 {
     private $repository;
     private $validator;
 
-    public function __construct(UserRepository $repository,UserValidator $validator)
+    public function __construct(UserRepository $repository, UserValidator $validator)
     {
         $this->repository   = $repository;
         $this->validator    = $validator;
     }
 
-    public function auth($data)
+    public function auth(array $data)
     {
         try
         {
@@ -33,22 +34,26 @@ class DashboardService
             $user = $this->repository->findWhere($data)->first();
 
             if($user->email !== $data['email'])
+            {
                 array_push($messages, 'Invalid email');
+            }
             if($user->password !== $data['password'])
+            {
                 array_push($messages, 'Invalid password');
+            }
 
             if(isset($messages))
             {
                 return [
                     'success' => false,
                     'message' => $messsages
-                ]);
+                ];
             }
 
             return [
                 'success'   =>  true,
                 'username'  =>  $user->nickname ?? $user->name
-            ]);
+            ];
         }
         catch(Exception $e)
         {

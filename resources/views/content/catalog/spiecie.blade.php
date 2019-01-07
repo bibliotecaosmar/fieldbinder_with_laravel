@@ -1,11 +1,7 @@
 @extends('templates.master_template')
 
-@section('horizon-view')
-
-@endsection
-
 @section('content-view')
-    <div class="container">
+    @forelse($spiecie)
         <table>
             <img src="" alt="">
             <thead>
@@ -19,13 +15,15 @@
             </thead>
             <tbody>
                 <tr>
-                    <tb>{{ $spiecie->spiecie ?? null }}</tb>
-                    <tb>{{ $spiecie->niche_id ?? null }}</tb>
-                    <tb>{{ $spiecie->habitat ?? null }}</tb>
-                    <tb>{{ $spiecie->common_name ?? null }}</tb>
-                    <tb>{{ $spiecie->authors ?? null }}</tb>
+                    <tb>{{ $spiecie->spiecie }}</tb>
+                    <tb>{{ $spiecie->niche_id }}</tb>
+                    <tb>{{ $spiecie->habitat }}</tb>
+                    <tb>{{ $spiecie->common_name }}</tb>
+                    <tb>{{ $spiecie->authors }}</tb>
                 </tr>
             </tbody>
         </table>
-    </div>
+    @else
+        {{ Don't exist spiecies }}
+    @endforelse
 @endsection

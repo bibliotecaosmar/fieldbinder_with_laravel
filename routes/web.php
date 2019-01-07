@@ -50,7 +50,7 @@ Route::group(['prefix' => '/catalog'], function()
  *
  */
 Route::resource('user', 'UsersController');
-Route::resource('spiecie', 'SpieciesController');
+Route::resource('spiecie.niche', 'SpieciesController');
 Route::resource('record', 'RecordsController');
 
 /**

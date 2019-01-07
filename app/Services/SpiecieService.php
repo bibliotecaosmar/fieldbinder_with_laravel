@@ -22,13 +22,11 @@
         {
             try
             {
-                $model = $this->repository->orderBy('id', 'DESC')
-                                          ->skip(($page - 1) * 9)
-                                          ->take(9)
-                                          ->with(['niche_id' => $id]);
+                $model = $this->repository->findWhere(['niche_id' => $id])->skip(($page-1)*9)->paginate(9);
+                dd($model);
 
                 $catalog = [
-                    'niche'     =>  $model->niche_id->niche,
+                    'niche'     =>  $model->niche->niche,
                     'page'      =>  $page,
                     'catalog'   =>  $model
                 ];

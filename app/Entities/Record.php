@@ -20,11 +20,10 @@ class Record extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [
-        'user_id', 'spiecie_id', 'spiecie', 'niche_id', 'habitat', 'common_name', 'pic_id'
-    ];
-
-    protected $hidden = ['spiecie_id'];
+    public $timestamps  = true;
+    protected $table    = 'records';
+    protected $fillable = ['user_id', 'spiecie_id', 'spiecie', 'niche_id', 'habitat', 'common_name', 'pic_id'];
+    protected $hidden   = ['spiecie_id'];
 
     public function users()
     {

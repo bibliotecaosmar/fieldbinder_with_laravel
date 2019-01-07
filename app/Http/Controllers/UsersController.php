@@ -28,21 +28,17 @@ class UsersController extends Controller
 
     public function store(UserCreateRequest $request)
     {
-        $request    = $this->service_user->store($request->all());
-        $user       = $request['success'] ? $request['data'] : null;
+        $store  = $this->service_user->store($request->all());
+        $user   = $store['success'] ? $store['user'] : null;
 
-        $this->service_dashboard->auth([
-            'email'     =>  $request->all()['email'],
-            'password'  =>  $request->all()['password']
-        ])
+        session('auth', $user);
 
         session()->flash('success', [
-                            'success'   => $request['success'],
-                            'message'   => $request['message'],
-                            'user'      => $user
+                            'success'   => $store['success'],
+                            'message'   => $store['message']
                             ]);
 
-        return redirect()->route('documentaion.guide');
+        return $store['success'] ? redirect()->route('documentation.guide') : redirect()->route('user.register');
     }
 
     public function show($id)
@@ -50,13 +46,13 @@ class UsersController extends Controller
         if(session('auth')['success'])
         {
             $profile    = $this->service_user->show($id);
-            $user       = $profile['success'] ? $profile['data'] ? null;
+            $user       = $profile['success'] ? $profile['data'] : null;
 
             session()->flash('profile', [
                 'user'      =>  $user
             ]);
 
-            return $profile['success'] ? redirect()->route('user.profile') : redirect()->route('not.found');
+            return $profile['success'] ? redirect()->route('user.profile') : redirect()->url(SERVER['HTTP_REFERER']);
         }
 
         session()->flash([
@@ -64,7 +60,7 @@ class UsersController extends Controller
             'messsage'  =>  'Action not avoid'
         ]);
 
-        return redirect()->route('not.found');
+        return redirect()->url(SERVER['HTTP_REFERER']);
     }
 
     public function edit($id)
@@ -77,7 +73,7 @@ class UsersController extends Controller
             session()->flash('panel', [
                 'success'   =>  $edit['success'],
                 'panel'     =>  $panel
-            ])
+            ]);
 
             return redirect()->route('catalog.manager');
         }
@@ -111,14 +107,14 @@ class UsersController extends Controller
             'messsage'  =>  'Action not avoid'
         ]);
 
-        return redirect()->route('not.found');
+        return redirect()->url(SERVER['HTTP_REFERER']);
     }
 
     public function destroy($id)
     {
         if($this->service_dashboard->auth()['success'])
         {
-            $deleted = $this->service_user->destroy($id, $password);
+            $deleted = $this->service_user->destroy($id);
 
             session()->flash([
                 'success'       => $deleted['success'],
@@ -133,6 +129,6 @@ class UsersController extends Controller
             'messsage'  =>  'Action not avoid'
         ]);
 
-        return redirect()->route('not.found');
+        return redirect()->url(SERVER['HTTP_REFERER']);
     }
 }

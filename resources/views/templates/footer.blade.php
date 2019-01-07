@@ -1,5 +1,5 @@
-<footer class="container">
-    <div id="author">
+<footer>
+    <span>
         Created by: Osmar Pereira da Silva Junior
-    </div>
+    </span>
 </footer>

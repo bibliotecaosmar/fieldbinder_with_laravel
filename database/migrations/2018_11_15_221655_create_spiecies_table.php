@@ -40,7 +40,7 @@ class CreateSpieciesTable extends Migration
 	public function down()
 	{
 		Schema::table('spiecies', function (Blueprint $table) {
-			$table->dropForeign('niches_niche_id_foreign');
+			$table->dropForeign('spiecies_niche_id_foreign');
 		});
 
 		Schema::drop('spiecies');

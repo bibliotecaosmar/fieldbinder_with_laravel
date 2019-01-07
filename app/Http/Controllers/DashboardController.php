@@ -10,8 +10,7 @@ use Exception;
 
 class DashboardController extends Controller
 {
-    private $repository;
-    private $validator;
+    private $service;
 
     public function __construct(DashboardService $service)
     {
@@ -35,7 +34,7 @@ class DashboardController extends Controller
 
         session()->flash('success', [
             'success'   => $auth['success'],
-            'message'   => $auth['message'],
+            'message'   => $auth['message']
         ]);
 
         return $auth['success'] ? redirect()->route('user.dashboard') : redirect()->route('user.login');

@@ -28,9 +28,9 @@
                 return [
                     'success' => true,
                     'message' => "User registered",
-                    'data'    => [
-                        'username'      =>  $user['nickname'] ?? $user['name'],
-                        'id'            =>  $user['id']
+                    'user'    => [
+                        'id'            =>  $user['id'],
+                        'username'      =>  $user['nickname'] ?? $user['name']
                     ]
                 ];
             }
@@ -109,13 +109,13 @@
         {
             try
             {
-                $this->repository->delete($id)
+                $user = $this->repository->find($id)->get();
 
-                $email = $this->repository->findWhere('id' = $id, 'email');
+                $this->repository->delete($id);
 
                 return [
                     'success'   => true,
-                    'message'    => 'User ' . $email . ' deleted'
+                    'message'   => 'User ' . $user->nickname ?? $user->name . ' deleted'
                 ];
             }
             catch (Exception $e)
