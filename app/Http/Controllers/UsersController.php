@@ -35,7 +35,7 @@ class UsersController extends Controller
 
         session()->flash('success', [
                             'success'   => $store['success'],
-                            'message'   => $store['message']
+                            'message'   => $store['message'],
                             ]);
 
         return $store['success'] ? redirect()->route('documentation.guide') : redirect()->route('user.register');

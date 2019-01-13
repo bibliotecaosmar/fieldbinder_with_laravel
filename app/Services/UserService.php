@@ -24,13 +24,12 @@
             {
                 $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
                 $user = $this->repository->create($data);
-
                 return [
                     'success' => true,
                     'message' => "User registered",
                     'user'    => [
-                        'id'            =>  $user['id'],
-                        'username'      =>  $user['nickname'] ?? $user['name']
+                        'id'            =>  $user->id,
+                        'username'      =>  $user->nickname ?? $user->name
                     ]
                 ];
             }

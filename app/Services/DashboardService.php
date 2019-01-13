@@ -24,11 +24,13 @@ class DashboardService
             if(env('PASSWORD_HASH'))
             {
                 Auth::attempt($data, false);
+                $data = ['email' => $data['email']];
                 $user = $this->repository->findWhere($data)->first();
 
                 return [
-                    'success'   => true,
-                    'username'  => $user->nickname ?? $user->name
+                    'success'       => true,
+                    'message'       => 'logged',
+                    'user'          => $user
                 ];
             }
             $user = $this->repository->findWhere($data)->first();
@@ -52,6 +54,7 @@ class DashboardService
 
             return [
                 'success'   =>  true,
+                'message'   =>  'logged',
                 'username'  =>  $user->nickname ?? $user->name
             ];
         }

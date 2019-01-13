@@ -24,15 +24,17 @@ class DashboardController extends Controller
 
     public function auth(Request $request)
     {
-        $auth       = $this->service->auth($request->all());
-        $username   = $auth['success'] ? $auth['data'] : null;
+        $data   = [
+            'email'     => $request->get('email'),
+            'password'  => $request->get('password')
+        ];
 
-        session('auth', [
-            'id'        => $username['id'],
-            'username'  => $username['username']
-        ]);
+        $auth   = $this->service->auth($data);
+        $user   = $auth['success'] ? $auth['user'] : null;
 
-        session()->flash('success', [
+        session('auth', $user);
+
+        session()->flash('login', [
             'success'   => $auth['success'],
             'message'   => $auth['message']
         ]);
