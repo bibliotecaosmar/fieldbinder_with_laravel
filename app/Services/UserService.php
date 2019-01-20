@@ -24,6 +24,7 @@
             {
                 $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
                 $user = $this->repository->create($data);
+
                 return [
                     'success' => true,
                     'message' => "User registered",

@@ -28,7 +28,7 @@ Route::get('/register', ['as' => 'user.register', 'uses' => 'Controller@register
 Route::group(['prefix' => '/documentation'], function()
 {
     Route::get('/guide', ['as' => 'documentation.guide', 'uses' => 'Controller@guide']);
-    Route::get('/ourproposal', ['as' => 'documentation.ourproposal', 'uses' => 'Controller@ourproposal']);
+    Route::get('/about_us', ['as' => 'documentation.aboutUs', 'uses' => 'Controller@aboutUs']);
 });
 
 /**

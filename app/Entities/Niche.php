@@ -23,7 +23,7 @@ class Niche extends Model implements Transformable
     protected $table    = 'niches';
     protected $fillable = ['niche_id', 'niche'];
 
-    public function spiecies()
+    public function spiecie()
     {
         return $this->hasMany(Spiecie::class);
     }

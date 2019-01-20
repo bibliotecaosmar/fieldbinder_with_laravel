@@ -32,8 +32,8 @@ class Spiecie extends Model implements Transformable
      */
     protected $hidden = [];
 
-    public function niches()
+    public function niche()
     {
-        return $this->belongTo(Niche::class);
+        return $this->belongsTo(Niche::class);
     }
 }

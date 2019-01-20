@@ -35,10 +35,10 @@ class Controller extends BaseController
         ]);
     }
 
-    public function ourproposal()
+    public function aboutUs()
     {
-        return view('content.documentation.ourproposal', [
-            'title' => 'Ourproposal - Fieldbinder'
+        return view('content.documentation.aboutUs', [
+            'title' => 'About Us - Fieldbinder'
         ]);
     }
 
@@ -50,9 +50,9 @@ class Controller extends BaseController
     public function catalog($niche, $page)
     {
         return view('content.catalog.catalog', [
-            'title' =>  'Catalog - Fieldbinder',
-            'niche' =>  $niche,
-            'page'  =>  $page
+            'title' => 'Catalog - Fieldbinder',
+            'niche' => $niche,
+            'page'  => $page
         ]);
     }
 
@@ -78,7 +78,7 @@ class Controller extends BaseController
     public function profile()
     {
         return view('content.user.profiler', [
-            'title'         => 'Profile - Fieldbinder'
+            'title' => 'Profile - Fieldbinder'
         ]);
     }
 

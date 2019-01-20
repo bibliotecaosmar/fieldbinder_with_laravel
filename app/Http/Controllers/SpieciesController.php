@@ -20,7 +20,7 @@ class SpieciesController extends Controller
         $this->service  = $service;
     }
 
-    public function index()
+    public function index($niche, $page)
     {
         return redirect()->route('catalog.spiecies');
     }

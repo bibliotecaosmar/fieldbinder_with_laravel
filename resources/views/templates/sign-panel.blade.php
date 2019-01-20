@@ -5,13 +5,13 @@
 @guest
 <ul>
     <li>
-        <a href="{{ route('user.login') }}">Signin</a>
+        <a href="{{ route('user.login') }}">Sign in</a>
     </li>
     <li>
         or
     </li>
     <li>
-        <a href="{{ route('user.register') }}">Signup</a>
+        <a href="{{ route('user.register') }}">Sign up</a>
     </li>
 </ul>
 @endguest

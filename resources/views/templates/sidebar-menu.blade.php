@@ -4,7 +4,7 @@
             <a href="{{ route('documentation.guide') }}">guide</a>
         </li>
         <li>
-            <a href="{{ route('documentation.ourproposal') }}">ourproposal</a>
+            <a href="{{ route('documentation.aboutUs') }}">about us</a>
         </li>
     </ul>
 </nav>

@@ -22,8 +22,7 @@
         {
             try
             {
-                $model = $this->repository->findWhere(['niche_id' => $id])->skip(($page-1)*9)->paginate(9);
-                dd($model);
+                $model = $this->repository->findWhere(['niche_id' => $id]);
 
                 $catalog = [
                     'niche'     =>  $model->niche->niche,
