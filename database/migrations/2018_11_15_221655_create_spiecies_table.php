@@ -19,7 +19,7 @@ class CreateSpieciesTable extends Migration
             $table->increments('id');
 
 			//data about spiecie
-			$table->string('spiecie', 55);
+			$table->string('name', 55);
 			$table->unsignedInteger('niche_id');
 			$table->string('habitat', 55);
 			$table->string('common_name', 55);

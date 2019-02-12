@@ -5,6 +5,7 @@ namespace App\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use App\Entities\Niche;
 
 /**
  * Class Spiecie.
@@ -15,6 +16,7 @@ class Spiecie extends Model implements Transformable
 {
     use TransformableTrait;
 
+    public $table      = 'spiecies';
     public $timestamps = true;
     /**
      * The attributes that are mass assignable.
@@ -22,7 +24,7 @@ class Spiecie extends Model implements Transformable
      * @var array
      */
     protected $fillable = [
-        'spiecie', 'niche_id', 'habitat', 'common_name', 'pic_id', 'authors'
+        'name', 'niche_id', 'habitat', 'common_name', 'pic_id', 'authors'
     ];
 
     /**

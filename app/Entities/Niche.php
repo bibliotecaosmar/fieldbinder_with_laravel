@@ -15,13 +15,23 @@ class Niche extends Model implements Transformable
 {
     use TransformableTrait;
 
+    public $table       = 'niches';
+    public $timestamps  = true;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $table    = 'niches';
-    protected $fillable = ['niche_id', 'niche'];
+    protected $fillable = [
+        'niche_id', 'niche'
+    ];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $hidden   = [];
 
     public function spiecie()
     {

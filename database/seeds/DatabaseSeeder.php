@@ -4,6 +4,8 @@ use Illuminate\Database\Seeder;
 use App\Entities\User;
 use App\Entities\Spiecie;
 use App\Entities\Niche;
+use App\Entities\Record;
+use Faker\Factory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,26 +16,35 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'nickname'      => 'osmarfilho',
-            'birth'         => '0304-02-01',
-            'pic'           => env('PASSWORD_HASH') ? bcrypt('img/profile_1387129839.jpg') : 'img/profile_1387129839.jpg',
-            'name'          => '',
-            'diploma'       => env('PASSWORD_HASH') ? bcrypt('') : '',
-            'email'         => 'osmar_filho@email.com',
-            'password'      => env('PASSWORD_HASH') ? bcrypt('12345') : '12345',
-            'permission'    => 'app.common'
-        ]);
+        Niche::create(['name' => 'plant']);
+        Niche::create(['name' => 'animal']);
+        Niche::create(['name' => 'insect']);
+        Niche::create(['name' => 'mushroom']);
 
         Spiecie::create([
-            'spiecie'       => 'Felis Catus',
-            'niche_id'      => 1,
-            'habitat'       => 'anywhere',
-            'common_name'   => 'cat',
-            'pic_id'        => bcrypt('spiecie_pic/cat001.jpg'),
-            'authors'       => 'Osmar',
+            'name'          => 'cat',
+            'niche_id'      => 2,
+            'habitat'       => 'california',
+            'common_name'   => 'catus',
+            'pic_id'        => '123231231',
+            'authors'       => 'asuka2'
         ]);
 
+        $faker = Factory::create();
 
+        foreach(range(1,50) as $index)
+        {
+            $pic_id = strval(rand(100,999));
+            $niche = rand(1,4);
+
+            Spiecie::create([
+                'name'          => $faker->word,
+                'niche_id'      => $niche,
+                'habitat'       => $faker->country,
+                'common_name'   => $faker->word,
+                'pic_id'        => $pic_id,
+                'authors'       => $faker->name
+            ]);
+        }
     }
 }

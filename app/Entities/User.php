@@ -13,6 +13,7 @@ class User extends Authenticatable
     use Notifiable;
     use SoftDeletes;
 
+    public $table      = 'users';
     public $timestamps = true;
     /**
      * The attributes that are mass assignable.
@@ -32,7 +33,7 @@ class User extends Authenticatable
         'password', 'pic', 'diploma', 'status', 'rememberToken'
     ];
 
-    public function records()
+    public function record()
     {
         return $this->hasMany(Record::class);
     }

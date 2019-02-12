@@ -18,7 +18,7 @@ class CreateNichesTable extends Migration
 		Schema::create('niches', function(Blueprint $table) {
             $table->increments('id');
 
-			$table->string('niche', 8);
+			$table->string('name', 8);
 
             $table->timestamps();
 		});
