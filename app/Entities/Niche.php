@@ -5,6 +5,8 @@ namespace App\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use App\Entities\Spiecie;
+use App\Entities\Record;
 
 /**
  * Class Niche.
@@ -38,4 +40,8 @@ class Niche extends Model implements Transformable
         return $this->hasMany(Spiecie::class);
     }
 
+    public function record()
+    {
+        return $this->hasMany(Record::class);
+    }
 }

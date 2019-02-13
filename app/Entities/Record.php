@@ -5,6 +5,9 @@ namespace App\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use App\Entities\User;
+use App\Entities\Niche;
+use App\Entities\Spiecie;
 
 /**
  * Class Record.
@@ -37,7 +40,16 @@ class Record extends Model implements Transformable
 
     public function user()
     {
-        return $this->belongTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
+    public function niche()
+    {
+        return $this->belongsTo(Niche::class);
+    }
+
+    public function spiecie()
+    {
+        return $this->belongsTo(Spiecie::class);
+    }
 }

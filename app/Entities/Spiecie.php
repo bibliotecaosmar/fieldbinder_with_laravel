@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use App\Entities\Niche;
+use App\Entities\Record;
 
 /**
  * Class Spiecie.
@@ -33,6 +34,11 @@ class Spiecie extends Model implements Transformable
      * @var array
      */
     protected $hidden = [];
+
+    public function spiecie()
+    {
+        return $this->hasMany(Record::class);
+    }
 
     public function niche()
     {
