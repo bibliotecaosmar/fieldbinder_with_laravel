@@ -25,7 +25,7 @@ class Niche extends Model implements Transformable
      * @var array
      */
     protected $fillable = [
-        'niche_id', 'niche'
+        'niche_id', 'name'
     ];
 
     /**

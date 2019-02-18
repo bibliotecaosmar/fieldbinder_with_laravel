@@ -52,6 +52,7 @@ Route::group(['prefix' => '/catalog'], function()
 Route::resource('user', 'UsersController');
 Route::resource('spiecie.niche', 'SpieciesController');
 Route::resource('record', 'RecordsController');
+Route::resource('pagination', 'PaginationController');
 
 /**
  *
@@ -60,7 +61,7 @@ Route::resource('record', 'RecordsController');
  *
  */
 Route::get('/logged', ['as' => 'user.dashboard', 'uses' => 'DashboardController@index']);
-Route::get('/{niche}&&{page?}', ['as' => 'spiecie.indexer', 'uses' => 'SpieciesController@indexer']);
+Route::get('/{niche}&&{page?}', ['as' => 'pagination.indexer', 'uses' => 'PaginationController@indexer']);
 
 /**
  *

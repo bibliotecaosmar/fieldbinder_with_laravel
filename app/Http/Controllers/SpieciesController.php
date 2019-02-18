@@ -25,24 +25,6 @@ class SpieciesController extends Controller
         return redirect()->route('catalog.spiecies');
     }
 
-    public function indexer($id, $page = 1)
-    {
-        $model = $this->service->indexer($id, $page);
-        $catalog = $model['success'] ? $model['catalog'] : null;
-
-        session()->flash('catalog', [
-            'success'   =>  $model['success'],
-            'niche'     =>  $catalog['niche'],
-            'page'      =>  $catalog['page'],
-            'catalog'   =>  $catalog['catalog']
-        ]);
-
-        return redirect()->route('catalog.spiecies', [
-            'niche'     =>  $catalog['niche'],
-            'page'      =>  $page
-        ]);
-    }
-
     public function store(SpiecieCreateRequest $request)
     {
         $request = $this->service->store($request->all());

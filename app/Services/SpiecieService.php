@@ -19,46 +19,6 @@
             $this->validator        = $validator;
         }
 
-        private function pagination($model, $page)
-        {
-            $size = count($model);
-
-            for($i = 0;$i < 9;$i++)
-            {
-                $aux    = $size - ($i + (9*($page - 1))));
-                $result = $model[$aux];
-            }
-            return $result;
-        }
-
-        public function indexer($id, $page)
-        {
-            try
-            {
-                $model = $this->repository->findWhere(['niche_id' => $id]);
-
-                $model = $this->pagination($model, $page);
-
-                $catalog = [
-                    'niche'     =>  $model[0]->niche->name,
-                    'page'      =>  $page,
-                    'catalog'   =>  $model
-                ];
-
-                return [
-                    'success'   =>  true,
-                    'catalog'   =>  $catalog
-                ];
-            }
-            catch(Exception $e)
-            {
-                return [
-                    'success'   => false,
-                    'niche'     => $niche->name ?? -1
-                ];
-            }
-        }
-
         public function store(array $data)
         {
             try
