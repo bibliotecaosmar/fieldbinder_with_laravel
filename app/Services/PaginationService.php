@@ -20,7 +20,7 @@ class PaginationService
     {
         try
         {
-            $niche      = $this->repository_niche->where('id', $id)->first()->name;
+            $niche      = $this->repository_niche->where('id', $id)->first();
             $model      = $this->repository->where('niche_id', $id)
                                            ->orderBy('id', 'DESC')
                                            ->paginate(9);

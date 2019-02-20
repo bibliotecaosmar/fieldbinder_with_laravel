@@ -61,7 +61,7 @@ Route::resource('pagination', 'PaginationController');
  *
  */
 Route::get('/logged', ['as' => 'user.dashboard', 'uses' => 'DashboardController@index']);
-Route::get('/{niche}&&{page?}', ['as' => 'pagination.indexer', 'uses' => 'PaginationController@indexer']);
+Route::get('/{niche?}&&{page?}', ['as' => 'pagination.indexer', 'uses' => 'PaginationController@indexer']);
 
 /**
  *

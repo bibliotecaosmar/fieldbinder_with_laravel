@@ -36,13 +36,14 @@ class PaginationController extends Controller
 
         session()->flash('catalog', [
             'success'   =>  $model['success'],
+            'catalog'   =>  $catalog['catalog'],
             'niche'     =>  $catalog['niche'],
-            'catalog'   =>  $catalog['catalog']
+            'page'      =>  $page
         ]);
 
         return redirect()->route('catalog.spiecies', [
-            'niche'     =>  $catalog['niche'],
-            'page'      =>  $page
+            'niche'     =>  $catalog['niche']->name,
+            'page'      =>  $page,
         ]);
     }
 }
