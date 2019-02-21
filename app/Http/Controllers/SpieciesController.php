@@ -28,35 +28,36 @@ class SpieciesController extends Controller
     public function store(SpiecieCreateRequest $request)
     {
         $request = $this->service->store($request->all());
-        $user = $request['success'] ? $request['data'] : null;
+        $store = $request['success'] ? $request['data'] : null;
 
-        session()->flash('success', [
+        session()->flash('store', [
                             'success' => $request['success'],
                             'message' => $request['message'],
                             ]);
 
-        return redirect()->route('user.dashboard', ['auth'  =>  $credentials]);
+        return redirect()->route('catalog.spiecies');
     }
 
     public function show($id)
     {
-        $spiecie = $this->repository->find($id);
+        $show       = $this->service->show($id);
+        $spiecie    = $show['success'] ? $show['spiecie'] : null;
 
-        if (request()->wantsJson()) {
+        session()->flash('spiecie', [
+            'success' => $show['success'],
+            'niche'   => $show['niche'],
+            'spiecie' => $spiecie
+        ]);
 
-            return response()->json([
-                'data' => $spiecie,
-            ]);
-        }
-
-        return view('spiecies.show', compact('spiecie'));
+        return redirect()->route('catalog.info', [
+            'niche'     => $show['niche'],
+            'spiecie'   => $spiecie->name
+        ]);
     }
 
     public function edit($id)
     {
-        $spiecie = $this->repository->find($id);
-
-        return view('spiecies.edit', compact('spiecie'));
+        $spiecie = $this->service->edit($id);
     }
 
     public function update(SpiecieUpdateRequest $request, $id)

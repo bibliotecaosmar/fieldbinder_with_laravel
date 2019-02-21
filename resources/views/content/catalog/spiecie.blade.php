@@ -1,9 +1,17 @@
 @extends('templates.master_template')
 
 @section('content-view')
-    @forelse($spiecie)
+    @if(session('spiecie')['success'])
+        <a href="{{ route('pagination.indexer', ['niche' =>  session('spiecie')['niche']->id]) }}">
+            <h4>
+                Catalog
+            </h4>
+            <h5>
+                {{ session('spiecie')['niche']->name }}
+            </h5>
+        </a>
         <table>
-            <img src="" alt="">
+            <img src="{{ session('spiecie')['spiecie']->pic_id }}" alt="{{ session('spiecie')['spiecie']->name }}">
             <thead>
                 <tr>
                     <tb>Spiecie:</tb>
@@ -15,15 +23,15 @@
             </thead>
             <tbody>
                 <tr>
-                    <tb>{{ $spiecie->spiecie }}</tb>
-                    <tb>{{ $spiecie->niche_id }}</tb>
-                    <tb>{{ $spiecie->habitat }}</tb>
-                    <tb>{{ $spiecie->common_name }}</tb>
-                    <tb>{{ $spiecie->authors }}</tb>
+                    <tb>{{ session('spiecie')['spiecie']->name }}</tb>
+                    <tb>{{ session('spiecie')['spiecie']->niche_id }}</tb>
+                    <tb>{{ session('spiecie')['spiecie']->habitat }}</tb>
+                    <tb>{{ session('spiecie')['spiecie']->common_name }}</tb>
+                    <tb>{{ session('spiecie')['spiecie']->authors }}</tb>
                 </tr>
             </tbody>
         </table>
     @else
-        {{ Don't exist spiecies }}
-    @endforelse
+        {{ session('spiecie')['message'] }}
+    @endif
 @endsection

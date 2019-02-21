@@ -4,6 +4,7 @@
     use Prettus\Validator\Contracts\ValidatorInterface;
     use App\Repositories\RecordRepository;
     use App\Repositories\SpiecieRepository;
+    use App\Repositories\NicheRepository;
     use App\Validators\SpiecieValidator;
     use Exception;
 
@@ -13,9 +14,11 @@
         private $validator;
 
         public function __construct(SpiecieRepository $repository,
+                                    NicheRepository $repository_niche,
                                     SpiecieValidator $validator)
         {
             $this->repository       = $repository;
+            $this->repository_niche = $repository_niche;
             $this->validator        = $validator;
         }
 
@@ -24,12 +27,12 @@
             try
             {
                 $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-                $user = $this->repository->create($data);
+                $spiecie = $this->repository->create($data);
 
                 return [
                     'success' => true,
                     'message' => "User registered",
-                    'data'    => $user
+                    'data'    => $spiecie
                 ];
             }
             catch(Exception $e)
@@ -39,5 +42,42 @@
                     'message' => 'require failed'
                 ];
             }
+        }
+
+        public function show($id)
+        {
+            try
+            {
+                $spiecie    = $this->repository->find($id);
+                $niche      = $this->repository_niche->find($spiecie->niche_id);
+
+                return [
+                    'success'   => true,
+                    'spiecie'   => $spiecie,
+                    'niche'     => $niche
+                ];
+            }
+            catch(Exception $e)
+            {
+                return [
+                    'success'   => false,
+                    'message'   => "Not found"
+                ];
+            }
+        }
+
+        public function edit($id)
+        {
+
+        }
+
+        public function update($id)
+        {
+
+        }
+
+        public function delete($id)
+        {
+
         }
     }

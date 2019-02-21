@@ -40,7 +40,7 @@ Route::group(['prefix' => '/catalog'], function()
 {
     Route::get('/{niche}/page/{page}', ['as' => 'catalog.spiecies', 'uses' => 'Controller@catalog']);
     Route::get('/info/{niche}', ['as' => 'catalog.info', 'uses' => 'Controller@spiecie']);
-    Route::get('/lister/{niche}', ['as' => 'catalog.lister', 'uses' => 'Controller@lister']);
+    Route::get('/lister/{id}', ['as' => 'catalog.lister', 'uses' => 'Controller@lister']);
 });
 
 /**
@@ -62,6 +62,7 @@ Route::resource('pagination', 'PaginationController');
  */
 Route::get('/logged', ['as' => 'user.dashboard', 'uses' => 'DashboardController@index']);
 Route::get('/{niche?}&&{page?}', ['as' => 'pagination.indexer', 'uses' => 'PaginationController@indexer']);
+Route::get('/{id}', ['as' => 'spiecie.show', 'uses' => 'SpieciesController@show']);
 
 /**
  *

@@ -50,9 +50,14 @@ class Controller extends BaseController
     public function catalog($niche, $page)
     {
         return view('content.catalog.catalog', [
-            'title' => 'Catalog - Fieldbinder',
-            'niche' => $niche,
-            'page'  => $page
+            'title' => 'Catalog - Fieldbinder'
+        ]);
+    }
+
+    public function spiecie()
+    {
+        return view('content.catalog.spiecie', [
+            'title' => 'Spiecie - Fieldbinder'
         ]);
     }
 
