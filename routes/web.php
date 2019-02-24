@@ -71,6 +71,8 @@ Route::get('/{id}', ['as' => 'spiecie.show', 'uses' => 'SpieciesController@show'
  */
 Route::post('/authenticate', ['as' => 'dashboard.login', 'uses' => 'DashboardController@auth']);
 Route::post('/vote', ['as' => 'survey.vote', 'uses' => 'SurveyController@vote']);
+Route::post('/uploadprofile', ['as' => 'upload.profile', 'uses' => 'UploadImageController@profile']);
+
 /*
 Route::get('/', function () {
     return view('welcome');

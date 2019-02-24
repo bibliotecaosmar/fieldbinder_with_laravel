@@ -9,6 +9,6 @@
         <link rel="stylesheet" href="{{ asset('vendor/node_modules/bootstrap/compiler/default_style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
-        <!--@yield('css-view')-->
+        @yield('css-view')
     </head>
     <body>

@@ -22,18 +22,18 @@
                 </tr>
             </thead>
             @forelse($users as user)
-            <tbody>
-                <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->nickname ?? $user->name }}</td>
-                    <td>{{ $user->birth }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->diploma }}</td>
-                    <td>{{ $user->permission }}</td>
-                </tr>
-            </tbody>
+                <tbody>
+                    <tr>
+                        <td>{{ $user->id }}</td>
+                        <td>{{ $user->nickname ?? $user->name }}</td>
+                        <td>{{ $user->birth }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->diploma }}</td>
+                        <td>{{ $user->permission }}</td>
+                    </tr>
+                </tbody>
             @empty
-            <h2>None Users</h2>
+                <h2>None Users</h2>
             @endforelse
         </table>
     @endauth
