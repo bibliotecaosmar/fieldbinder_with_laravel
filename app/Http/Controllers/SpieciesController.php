@@ -30,7 +30,7 @@ class SpieciesController extends Controller
         $request = $this->service->store($request->all());
         $store = $request['success'] ? $request['data'] : null;
 
-        session()->flash('store', [
+        session()->put('store', [
                             'success' => $request['success'],
                             'message' => $request['message'],
                             ]);
@@ -43,7 +43,7 @@ class SpieciesController extends Controller
         $show       = $this->service->show($id);
         $spiecie    = $show['success'] ? $show['spiecie'] : null;
 
-        session()->flash('spiecie', [
+        session()->put('spiecie', [
             'success' => $show['success'],
             'niche'   => $show['niche'],
             'spiecie' => $spiecie

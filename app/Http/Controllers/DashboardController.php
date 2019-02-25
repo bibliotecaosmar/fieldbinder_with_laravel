@@ -24,15 +24,15 @@ class DashboardController extends Controller
 
     public function auth(Request $request)
     {
-        $data   = [
+        $login   = [
             'email'     => $request->get('email'),
             'password'  => $request->get('password')
         ];
 
-        $auth   = $this->service->auth($data);
+        $auth   = $this->service->auth($login);
         $user   = $auth['success'] ? $auth['user'] : null;
 
-        session('auth', $user);
+        session()->put('auth', $user);
 
         session()->flash('login', [
             'success'   => $auth['success'],
@@ -44,6 +44,8 @@ class DashboardController extends Controller
 
     public function logoff()
     {
+        session('auth') ? session()->forget('auth') : null;
 
+        redirect()->route('pagination.indexer');
     }
 }

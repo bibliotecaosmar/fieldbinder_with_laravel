@@ -13,18 +13,35 @@
 
 /**
  *
- *
+ *=========================================================================*
  *  *Routes that get the view*
+ *=========================================================================*
  *
  */
-#homepage
+
+/**
+*
+*  *Homepage*
+*
+*/
 Route::redirect('/', '/home');
 Route::get('/home', ['as' => 'home', 'uses' => 'Controller@home']);
+
+/**
+ *
+ *  *User Views*
+ *
+ */
 #user pages
 Route::get('/profile', ['as' => 'user.profile', 'uses' => 'Controller@profile']);
 Route::get('/login', ['as' => 'user.login', 'uses' => 'Controller@login']);
 Route::get('/register', ['as' => 'user.register', 'uses' => 'Controller@register']);
-#website documentation
+
+/**
+ *
+ *  *Documents Views*
+ *
+ */
 Route::group(['prefix' => '/documentation'], function()
 {
     Route::get('/guide', ['as' => 'documentation.guide', 'uses' => 'Controller@guide']);
@@ -71,10 +88,5 @@ Route::get('/{id}', ['as' => 'spiecie.show', 'uses' => 'SpieciesController@show'
  */
 Route::post('/authenticate', ['as' => 'dashboard.login', 'uses' => 'DashboardController@auth']);
 Route::post('/vote', ['as' => 'survey.vote', 'uses' => 'SurveyController@vote']);
-Route::post('/uploadprofile', ['as' => 'upload.profile', 'uses' => 'UploadImageController@profile']);
-
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-*/
+Route::post('/upload_profile', ['as' => 'upload.profile', 'uses' => 'UploadImageController@profile']);
+Route::post('/upload_lister', ['as' => 'upload.lister', 'uses' => 'UploadImageController@lister']);

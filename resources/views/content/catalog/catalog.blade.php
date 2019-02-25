@@ -8,8 +8,9 @@
     @endif
 
     @if(session('catalog')['success'])
-        {{ $catalog = session('catalog')['catalog'] }}
-        {{ $niche   = session('catalog')['niche'] }}
+        <p hidden>{{ $catalog = session('catalog')['catalog'] }}</p>
+        <p hidden>{{ $niche   = session('catalog')['niche'] }}</p>
+
         <a href="{{ route('pagination.indexer', ['niche' =>  $niche->id]) }}">
             <h4>
                 Catalog

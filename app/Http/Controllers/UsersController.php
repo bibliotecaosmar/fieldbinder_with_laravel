@@ -29,14 +29,8 @@ class UsersController extends Controller
     public function store(UserCreateRequest $request)
     {
         $store  = $this->service_user->store($request->all());
-        $user   = $store['success'] ? $store['user'] : null;
 
-        session('auth', $user);
-
-        session()->flash('success', [
-                            'success'   => $store['success'],
-                            'message'   => $store['message'],
-                            ]);
+        session()->put('auth', $store);
 
         return $store['success'] ? redirect()->route('documentation.guide') : redirect()->route('user.register');
     }
@@ -45,17 +39,15 @@ class UsersController extends Controller
     {
         if(session('auth')['success'])
         {
-            $profile    = $this->service_user->show($id);
+            $profile    = $this->service_user->show(session('auth')['user']->id);
             $user       = $profile['success'] ? $profile['data'] : null;
 
-            session()->flash('profile', [
-                'user'      =>  $user
-            ]);
+            session()->put('profile', $profile);
 
             return $profile['success'] ? redirect()->route('user.profile') : redirect()->url(SERVER['HTTP_REFERER']);
         }
 
-        session()->flash([
+        session()->flash('profile', [
             'success'   =>  false,
             'messsage'  =>  'Action not avoid'
         ]);

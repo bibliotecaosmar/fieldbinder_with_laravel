@@ -19,16 +19,8 @@ class PaginationController extends Controller
         return redirect()->route('catalog.spiecies');
     }
 
-    public function indexer($id, $page = 1)
+    public function indexer($id = 1, $page = 1)
     {
-        // if(session('catalog')['success'] ?? 0)
-        // {
-        //     redirect()->route('catalog.spiecies', [
-        //         'niche'     => session('catalog')['niche']->name,
-        //         'page'      => $page
-        //     ]);
-        // }
-
         $model = $this->service->indexer($id, $page);
         $catalog = $model['success'] ? $model['catalog'] : null;
 
@@ -36,7 +28,6 @@ class PaginationController extends Controller
             'success'   =>  $model['success'],
             'catalog'   =>  $catalog['catalog'],
             'niche'     =>  $catalog['niche'],
-            'page'      =>  $page
         ]);
 
         return redirect()->route('catalog.spiecies', [
