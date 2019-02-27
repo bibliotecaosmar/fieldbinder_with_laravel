@@ -83,13 +83,13 @@
             }
         }
 
-        public function update($data)
+        public function update($data, $id)
         {
             try
             {
                 $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-                $this->repository->update($data);
+                $this->repository->update($data, $id);
 
                 return [
                     'success'   =>  true,

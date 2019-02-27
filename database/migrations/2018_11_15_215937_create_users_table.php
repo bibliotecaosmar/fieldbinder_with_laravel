@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
 			//people data
 			$table->string('nickname', 24)->unique()->nullable();
 			$table->date('birth', 10);
-			$table->string('pic', 255)->nullable();
+			$table->string('pic_id', 255)->nullable();
 			$table->string('name', 50)->nullable();
 			$table->string('diploma', 255)->nullable();
 

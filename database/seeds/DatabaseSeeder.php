@@ -21,15 +21,6 @@ class DatabaseSeeder extends Seeder
         Niche::create(['name' => 'insect']);
         Niche::create(['name' => 'mushroom']);
 
-        Spiecie::create([
-            'name'          => 'cat',
-            'niche_id'      => 2,
-            'habitat'       => 'california',
-            'common_name'   => 'catus',
-            'pic_id'        => '123231231',
-            'authors'       => 'asuka2'
-        ]);
-
         $faker = Factory::create();
 
         foreach(range(1,50) as $index)
@@ -44,6 +35,21 @@ class DatabaseSeeder extends Seeder
                 'common_name'   => $faker->word,
                 'pic_id'        => $pic_id,
                 'authors'       => $faker->name
+            ]);
+        }
+
+        foreach(range(1,10) as $profile)
+        {
+            $pic_id = strval(rand(100,999));
+
+            User::create([
+                'nickname'      => null,
+                'birth'         => $faker->date,
+                'pic_id'        => $pic_id,
+                'name'          => $faker->name,
+                'diploma'       => null,
+                'email'         => $faker->email,
+                'password'      => $faker->password
             ]);
         }
     }
