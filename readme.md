@@ -5,4 +5,4 @@ Version with Laravel of the Fieldbinder Application made early with basic php.
 https://drive.google.com/open?id=1nEGZntA-k18tqeDh2_LXa1TGBz5XR0Th
 
 ## Example
-![alt text](https://github.com/bibliotecaosmar/fieldbinder_with_laravel/blob/maste/imgs/tela-animal.png?raw=true)
+!screen(https://github.com/bibliotecaosmar/fieldbinder_with_laravel/blob/maste/imgs/tela-animal.png?raw=true)
